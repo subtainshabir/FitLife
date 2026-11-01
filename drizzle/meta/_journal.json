@@ -8,6 +8,13 @@
       "when": 1793490815455,
       "tag": "0000_same_rictor",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793534913685,
+      "tag": "0001_dry_nemesis",
+      "breakpoints": true
     }
   ]
 }

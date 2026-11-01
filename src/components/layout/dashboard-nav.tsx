@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import {
   Activity,
   Home,
+  Calculator,
+  Target,
   Utensils,
   Dumbbell,
   LineChart,
@@ -38,6 +40,18 @@ export function DashboardNav() {
       functional: true,
     },
     {
+      name: t.common.assessment,
+      href: "/assessment",
+      icon: Calculator,
+      functional: true,
+    },
+    {
+      name: t.common.goals,
+      href: "/goals",
+      icon: Target,
+      functional: true,
+    },
+    {
       name: t.common.nutrition,
       href: "/dashboard#nutrition",
       icon: Utensils,
@@ -48,13 +62,6 @@ export function DashboardNav() {
       name: t.common.workouts,
       href: "/dashboard#workouts",
       icon: Dumbbell,
-      functional: false,
-      badge: "Soon",
-    },
-    {
-      name: t.common.progress,
-      href: "/dashboard#progress",
-      icon: LineChart,
       functional: false,
       badge: "Soon",
     },
@@ -288,16 +295,29 @@ export function DashboardNav() {
           <span className="text-[10px]">{t.common.home}</span>
         </Link>
 
-        <button
-          type="button"
-          onClick={() => setShowAiModal(true)}
-          className="flex flex-col items-center gap-1 p-2 rounded-xl text-emerald-600 dark:text-emerald-400 font-bold"
+        <Link
+          href="/assessment"
+          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+            pathname === "/assessment"
+              ? "text-primary font-bold"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
         >
-          <div className="relative">
-            <Sparkles className="h-4 w-4 animate-bounce" />
-          </div>
-          <span className="text-[10px]">{t.common.aiCoach}</span>
-        </button>
+          <Calculator className="h-4 w-4" />
+          <span className="text-[10px]">{t.common.assessment}</span>
+        </Link>
+
+        <Link
+          href="/goals"
+          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+            pathname === "/goals"
+              ? "text-primary font-bold"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Target className="h-4 w-4" />
+          <span className="text-[10px]">{t.common.goals}</span>
+        </Link>
 
         <Link
           href="/profile"

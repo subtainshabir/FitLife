@@ -34,8 +34,12 @@ import {
   MapPin,
   ChevronRight,
   Calendar,
+  Calculator,
+  Plus,
+  Clock,
 } from "lucide-react";
-import { UserProfile } from "@/db/schema";
+import { UserProfile, BodyAssessment, FitnessGoal } from "@/db/schema";
+import { kgToLbs } from "@/lib/services/fitness-calculator";
 
 function DashboardContent() {
   const router = useRouter();
@@ -45,6 +49,9 @@ function DashboardContent() {
 
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [latestAssessment, setLatestAssessment] = useState<BodyAssessment | null>(null);
+  const [activeGoal, setActiveGoal] = useState<FitnessGoal | null>(null);
+  const [goalProgress, setGoalProgress] = useState<any | null>(null);
   const [justOnboarded, setJustOnboarded] = useState(false);
   const [showAiModal, setShowAiModal] = useState(false);
 
@@ -60,12 +67,28 @@ function DashboardContent() {
       return;
     }
 
-    async function loadData() {
+    async function loadDashboardData() {
       try {
-        const res = await fetch("/api/v1/users/me");
-        if (res.ok) {
-          const data = await res.json();
-          setProfile(data.profile);
+        const [userRes, assessRes, goalsRes] = await Promise.all([
+          fetch("/api/v1/users/me"),
+          fetch("/api/v1/assessments/latest"),
+          fetch("/api/v1/goals"),
+        ]);
+
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setProfile(userData.profile);
+        }
+
+        if (assessRes.ok) {
+          const assessData = await assessRes.json();
+          setLatestAssessment(assessData.assessment || null);
+        }
+
+        if (goalsRes.ok) {
+          const goalsData = await goalsRes.json();
+          setActiveGoal(goalsData.activeGoal || null);
+          setGoalProgress(goalsData.activeGoalProgress || null);
         }
       } catch (err) {
         console.error("Dashboard data load error:", err);
@@ -75,7 +98,7 @@ function DashboardContent() {
     }
 
     if (status === "authenticated") {
-      loadData();
+      loadDashboardData();
     }
   }, [status, router]);
 
@@ -88,6 +111,21 @@ function DashboardContent() {
   }
 
   const userName = session?.user?.name || "Athlete";
+
+  // Real display attributes derived strictly from saved database records
+  const currentWeightValue = profile?.currentWeight ?? latestAssessment?.weight ?? null;
+  const targetWeightValue = activeGoal?.targetWeight ?? null;
+  const bmiValue = latestAssessment?.bmi ?? null;
+  const dailyCaloriesValue = latestAssessment?.targetCalories ?? null;
+  const activeGoalType = activeGoal?.goalType ?? profile?.fitnessGoal ?? null;
+
+  // Macro percentages from notes or defaults if assessment exists
+  const assessNotes = (latestAssessment?.calculationNotes as Record<string, any>) || {};
+  const macroPcts = assessNotes.macroPercentages || {
+    protein: 25,
+    carbs: 50,
+    fat: 25,
+  };
 
   return (
     <div className="space-y-8 pb-12">
@@ -116,7 +154,6 @@ function DashboardContent() {
 
       {/* Fitness-Themed Welcome Hero Section */}
       <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-slate-950 text-white shadow-2xl">
-        {/* Background Athletic Image */}
         <img
           src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=1400&auto=format&fit=crop"
           alt="Fitness Training Hub"
@@ -130,184 +167,347 @@ function DashboardContent() {
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/20 px-3 py-0.5 text-[11px] font-bold text-emerald-300 backdrop-blur-md">
                 <Flame className="h-3.5 w-3.5 text-emerald-400 animate-pulse" />
-                <span>Phase 1 Active</span>
+                <span>Phase 2 Active: Biometrics & Goals</span>
               </span>
               <span className="text-xs text-slate-300">
-                Connected &bull; PostgreSQL 16
+                PostgreSQL 16 &bull; Verified Calculations
               </span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white drop-shadow">
-              Welcome back, <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent">{userName}</span>
+              {t.dashboard.greeting},{" "}
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent">
+                {userName}
+              </span>
             </h1>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Your biometric attributes, fitness objectives, and dietary preferences are calibrated. Explore your baseline physical overview below.
+              {t.dashboard.subtitle}
             </p>
 
-            {/* Quick Action Buttons */}
+            {/* Quick Action Navigation Buttons */}
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
-              <Link href="/profile">
+              <Link href="/assessment">
                 <Button size="sm" variant="gradient" className="gap-2 text-xs font-bold rounded-xl shadow-md shadow-emerald-500/25">
-                  <Edit3 className="h-3.5 w-3.5" />
-                  <span>Update Profile</span>
+                  <Calculator className="h-3.5 w-3.5" />
+                  <span>{t.dashboard.takeAssessmentNow}</span>
                 </Button>
               </Link>
-              <Link href="/onboarding">
+              <Link href="/goals">
                 <Button size="sm" variant="outline" className="gap-2 text-xs font-semibold rounded-xl text-white border-white/20 hover:bg-white/10">
-                  <Zap className="h-3.5 w-3.5 text-amber-400" />
-                  <span>Re-Calibrate</span>
+                  <Target className="h-3.5 w-3.5 text-emerald-400" />
+                  <span>{t.dashboard.setGoalNow}</span>
                 </Button>
               </Link>
             </div>
           </div>
 
-          {/* Quick Profile Health Indicator Widget */}
+          {/* Biometric Status Summary Pill */}
           <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex items-center gap-4 shrink-0 max-w-xs">
             <ProgressRing
-              value={profile ? 100 : 25}
+              value={latestAssessment && activeGoal ? 100 : latestAssessment || profile ? 65 : 25}
               size={64}
               strokeWidth={6}
               circleClassName="text-emerald-400"
             >
-              <span className="text-xs text-white font-extrabold">{profile ? "100%" : "25%"}</span>
+              <span className="text-xs text-white font-extrabold">
+                {latestAssessment && activeGoal ? "100%" : latestAssessment || profile ? "65%" : "25%"}
+              </span>
             </ProgressRing>
             <div>
               <span className="text-xs font-bold text-white block">
-                {profile ? "Profile Calibrated" : "Calibration Needed"}
+                {latestAssessment && activeGoal
+                  ? "Calibrated & Active Goal"
+                  : latestAssessment
+                  ? "Assessment Recorded"
+                  : profile
+                  ? "Profile Ready"
+                  : "Calibration Needed"}
               </span>
               <span className="text-[11px] text-slate-300 block mt-0.5">
-                {profile ? "Ready for Phase 2 AI" : "Complete onboarding now"}
+                {latestAssessment && activeGoal
+                  ? "Track your weekly progress"
+                  : latestAssessment
+                  ? "Set your active goal next"
+                  : "Perform initial body assessment"}
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Incomplete Profile Alert if no profile */}
-      {!profile && (
-        <Card className="border-amber-500/40 bg-amber-500/10 rounded-2xl">
-          <CardContent className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm">
-                <AlertTriangle className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-sm font-bold text-foreground">
-                  {t.dashboard.profileIncompleteAlert}
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  Add height, weight, and fitness goals to prepare your account.
-                </p>
-              </div>
-            </div>
-            <Link href="/onboarding" className="w-full sm:w-auto">
-              <Button variant="default" size="sm" className="w-full sm:w-auto text-xs font-bold rounded-xl gap-2">
-                <span>{t.dashboard.completeProfileNow}</span>
-                <ArrowRight className={`h-4 w-4 ${isRtl ? "rotate-180" : ""}`} />
-              </Button>
+      {/* 4 CORE METRIC CARDS (Current Weight, Target Weight, BMI, Daily Calorie Target) */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-extrabold text-foreground flex items-center gap-2">
+            <Activity className="h-5 w-5 text-emerald-500" />
+            <span>Phase 2 Biometric & Goal Indicators</span>
+          </h2>
+          <div className="flex items-center gap-2">
+            <Link href="/assessment" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+              <span>Assessment</span>
+              <ChevronRight className="h-3.5 w-3.5" />
             </Link>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Visual Metrics Cards */}
-      {profile && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-extrabold text-foreground flex items-center gap-2">
-              <Activity className="h-5 w-5 text-emerald-500" />
-              <span>Baseline Physical Metrics</span>
-            </h2>
-            <Link href="/profile" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
-              <span>Edit Details</span>
+            <span className="text-muted-foreground">&bull;</span>
+            <Link href="/goals" className="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+              <span>Goals</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </Link>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Weight Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Weight
-                </span>
-                <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                  <Scale className="h-4 w-4" />
-                </div>
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-foreground">
-                  {profile.currentWeight ? profile.currentWeight : "--"}
-                </span>
-                <span className="text-xs font-bold text-muted-foreground">kg</span>
-              </div>
-              <span className="text-[10px] text-muted-foreground mt-1 block">
-                Recorded Physical Metric
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* 1. CURRENT WEIGHT CARD */}
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                {t.dashboard.weight}
               </span>
+              <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <Scale className="h-4 w-4" />
+              </div>
             </div>
 
-            {/* Height Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Height
-                </span>
-                <div className="h-8 w-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
-                  <Ruler className="h-4 w-4" />
+            {currentWeightValue !== null ? (
+              <>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                    {currentWeightValue}
+                  </span>
+                  <span className="text-xs font-bold text-muted-foreground">kg</span>
                 </div>
-              </div>
-              <div className="flex items-baseline gap-1">
-                <span className="text-2xl sm:text-3xl font-black text-foreground">
-                  {profile.height ? profile.height : "--"}
+                <span className="text-[10px] text-muted-foreground mt-1 block">
+                  {kgToLbs(currentWeightValue)} lbs &bull; Live Metric
                 </span>
-                <span className="text-xs font-bold text-muted-foreground">cm</span>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <span className="text-sm font-semibold text-muted-foreground block">
+                  Not Recorded
+                </span>
+                <Link href="/assessment">
+                  <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
+                    Record Weight
+                  </Button>
+                </Link>
               </div>
-              <span className="text-[10px] text-muted-foreground mt-1 block">
-                Standard Stature
+            )}
+          </div>
+
+          {/* 2. TARGET WEIGHT CARD */}
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                {t.dashboard.targetWeight}
               </span>
+              <div className="h-8 w-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+                <Target className="h-4 w-4" />
+              </div>
             </div>
 
-            {/* Fitness Goal Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Objective
-                </span>
-                <div className="h-8 w-8 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
-                  <Target className="h-4 w-4" />
+            {targetWeightValue !== null ? (
+              <>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">
+                    {targetWeightValue}
+                  </span>
+                  <span className="text-xs font-bold text-muted-foreground">kg</span>
                 </div>
+                <span className="text-[10px] text-muted-foreground mt-1 block">
+                  {currentWeightValue ? `${Math.round(Math.abs(targetWeightValue - currentWeightValue) * 10) / 10} kg difference` : "Active Target"}
+                </span>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <span className="text-sm font-semibold text-muted-foreground block">
+                  No Goal Target
+                </span>
+                <Link href="/goals">
+                  <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
+                    Set Target
+                  </Button>
+                </Link>
               </div>
-              <div className="text-sm font-extrabold text-foreground truncate">
-                {profile.fitnessGoal ? (t.goals[profile.fitnessGoal] || profile.fitnessGoal) : "General Fitness"}
-              </div>
-              <span className="text-[10px] text-muted-foreground mt-1 block capitalize">
-                {profile.fitnessExperience || "Beginner"} level
+            )}
+          </div>
+
+          {/* 3. BMI CARD */}
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                {t.dashboard.currentBmi}
               </span>
+              <div className="h-8 w-8 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
+                <HeartPulse className="h-4 w-4" />
+              </div>
             </div>
 
-            {/* Location & Currency Card */}
-            <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                  Region
-                </span>
-                <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                  <MapPin className="h-4 w-4" />
+            {bmiValue !== null ? (
+              <>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                    {bmiValue}
+                  </span>
+                  <span className="text-xs font-bold text-muted-foreground">kg/m²</span>
                 </div>
+                <div className="mt-1 flex items-center gap-1.5">
+                  <Badge variant="outline" className="text-[9px] capitalize px-1.5 py-0">
+                    {latestAssessment?.bmiCategory?.replace(/_/g, " ")}
+                  </Badge>
+                </div>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <span className="text-sm font-semibold text-muted-foreground block">
+                  Uncalculated
+                </span>
+                <Link href="/assessment">
+                  <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
+                    Calculate BMI
+                  </Button>
+                </Link>
               </div>
-              <div className="text-sm font-extrabold text-foreground truncate">
-                {profile.city && profile.country ? `${profile.city}, ${profile.country}` : "Pakistan"}
-              </div>
-              <span className="text-[10px] text-muted-foreground mt-1 block">
-                Currency: <strong className="text-foreground">{profile.preferredCurrency}</strong>
+            )}
+          </div>
+
+          {/* 4. DAILY CALORIE TARGET CARD */}
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                {t.dashboard.dailyCalories}
               </span>
+              <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                <Flame className="h-4 w-4" />
+              </div>
             </div>
+
+            {dailyCaloriesValue !== null ? (
+              <>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                    {dailyCaloriesValue.toLocaleString()}
+                  </span>
+                  <span className="text-xs font-bold text-muted-foreground">kcal</span>
+                </div>
+                <span className="text-[10px] text-muted-foreground mt-1 block">
+                  {latestAssessment?.targetProteinGrams}g P &bull; {latestAssessment?.targetCarbsGrams}g C &bull; {latestAssessment?.targetFatGrams}g F
+                </span>
+              </>
+            ) : (
+              <div className="space-y-2">
+                <span className="text-sm font-semibold text-muted-foreground block">
+                  Uncalculated
+                </span>
+                <Link href="/assessment">
+                  <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
+                    Get Macro Split
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
+      </div>
+
+      {/* ACTIVE FITNESS GOAL & PROGRESS HERO BANNER */}
+      {activeGoal ? (
+        <Card className="rounded-3xl border-emerald-500/30 bg-gradient-to-br from-card via-card to-emerald-500/5 shadow-md p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2.5">
+                <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-sm">
+                  <Target className="h-5 w-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                    {t.dashboard.activeGoal}
+                  </span>
+                  <h3 className="text-base font-extrabold text-foreground">
+                    {t.goals[activeGoal.goalType] || activeGoal.goalType}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Goal Progress bar */}
+              <div className="space-y-1.5 max-w-md">
+                <div className="flex items-center justify-between text-xs font-bold">
+                  <span className="text-muted-foreground">{t.dashboard.goalProgress}</span>
+                  <span className="text-emerald-600 dark:text-emerald-400">
+                    {goalProgress?.percentage ?? 0}% completed
+                  </span>
+                </div>
+                <div className="h-2.5 w-full rounded-full bg-muted overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                    style={{ width: `${goalProgress?.percentage ?? 0}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Timeline info */}
+              <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-3.5 w-3.5" />
+                  <span>Started: {new Date(activeGoal.startDate).toLocaleDateString()}</span>
+                </span>
+                {activeGoal.targetDate && (
+                  <span className="flex items-center gap-1 font-semibold text-foreground">
+                    <Clock className="h-3.5 w-3.5 text-emerald-500" />
+                    <span>Target Date: {new Date(activeGoal.targetDate).toLocaleDateString()}</span>
+                  </span>
+                )}
+                {activeGoal.targetRate && (
+                  <span className="text-[11px] font-semibold">
+                    Pace: {activeGoal.targetRate} kg/week
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Circular Ring and Link */}
+            <div className="flex flex-col items-center sm:items-end gap-3 shrink-0">
+              <ProgressRing
+                value={goalProgress?.percentage ?? 0}
+                size={76}
+                strokeWidth={7}
+                circleClassName="text-emerald-500"
+              >
+                <span className="text-xs font-black text-foreground">
+                  {goalProgress?.percentage ?? 0}%
+                </span>
+              </ProgressRing>
+
+              <Link href="/goals">
+                <Button size="sm" variant="outline" className="rounded-xl text-xs font-bold gap-1">
+                  <span>Manage Goal</span>
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Card>
+      ) : (
+        /* Empty State if no active goal */
+        <Card className="rounded-3xl border-dashed border-2 border-border/80 p-6 text-center space-y-3">
+          <div className="h-12 w-12 mx-auto rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+            <Target className="h-6 w-6" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-foreground">{t.dashboard.noGoalData}</h3>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              Establish a target weight with safe weekly pacing (0.25 - 0.75 kg/wk) to start tracking.
+            </p>
+          </div>
+          <Link href="/goals">
+            <Button size="sm" variant="gradient" className="rounded-xl text-xs font-bold gap-1.5">
+              <Plus className="h-4 w-4" />
+              <span>{t.dashboard.setGoalNow}</span>
+            </Button>
+          </Link>
+        </Card>
       )}
 
-      {/* Nutrition Macro Indicators (Visual Progress Rings Placeholder) */}
+      {/* NUTRITION MACRO BLUEPRINT (Rendered from real assessment or empty state) */}
       <Card className="border-border/80 bg-card rounded-3xl p-6 shadow-sm overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-4 mb-6">
           <div className="flex items-center gap-3">
@@ -316,61 +516,94 @@ function DashboardContent() {
             </div>
             <div>
               <h3 className="text-base font-extrabold text-foreground">
-                Nutrition Macro Target Ratios
+                Daily Estimated Nutrition Targets
               </h3>
               <p className="text-xs text-muted-foreground">
-                Target macronutrient blueprint (Phase 2 dynamic tracker preview)
+                {latestAssessment
+                  ? `Deterministic calculations calibrated for ${latestAssessment.primaryGoal.replace(/_/g, " ")}`
+                  : "Calculate your body assessment to view evidence-based protein, carb, and fat targets"}
               </p>
             </div>
           </div>
-          <Badge variant="comingSoon" className="text-[10px] self-start sm:self-auto">
-            Phase 2 Integration
-          </Badge>
+
+          {latestAssessment && (
+            <Link href="/assessment">
+              <Button size="sm" variant="outline" className="rounded-xl text-xs font-semibold gap-1">
+                <span>Recalculate</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          {/* Protein Ratio */}
-          <div className="flex flex-col items-center p-4 rounded-2xl bg-muted/20 border border-border/60">
-            <ProgressRing
-              value={35}
-              size={76}
-              strokeWidth={7}
-              circleClassName="text-emerald-500"
-            >
-              <span className="text-xs font-black text-foreground">35%</span>
-            </ProgressRing>
-            <span className="text-xs font-bold text-foreground mt-3">Protein Target</span>
-            <span className="text-[10px] text-muted-foreground mt-0.5">Lean tissue building ratio</span>
-          </div>
+        {latestAssessment ? (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+            {/* Protein Target */}
+            <div className="flex flex-col items-center p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20">
+              <ProgressRing
+                value={macroPcts.protein}
+                size={76}
+                strokeWidth={7}
+                circleClassName="text-emerald-500"
+              >
+                <span className="text-xs font-black text-foreground">{macroPcts.protein}%</span>
+              </ProgressRing>
+              <span className="text-xs font-bold text-foreground mt-3">
+                {latestAssessment.targetProteinGrams}g Protein
+              </span>
+              <span className="text-[10px] text-muted-foreground mt-0.5">
+                {latestAssessment.targetProteinGrams * 4} kcal &bull; Lean muscle synthesis
+              </span>
+            </div>
 
-          {/* Carbs Ratio */}
-          <div className="flex flex-col items-center p-4 rounded-2xl bg-muted/20 border border-border/60">
-            <ProgressRing
-              value={45}
-              size={76}
-              strokeWidth={7}
-              circleClassName="text-amber-500"
-            >
-              <span className="text-xs font-black text-foreground">45%</span>
-            </ProgressRing>
-            <span className="text-xs font-bold text-foreground mt-3">Complex Carbs</span>
-            <span className="text-[10px] text-muted-foreground mt-0.5">Sustained athletic energy</span>
-          </div>
+            {/* Carbohydrates Target */}
+            <div className="flex flex-col items-center p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20">
+              <ProgressRing
+                value={macroPcts.carbs}
+                size={76}
+                strokeWidth={7}
+                circleClassName="text-amber-500"
+              >
+                <span className="text-xs font-black text-foreground">{macroPcts.carbs}%</span>
+              </ProgressRing>
+              <span className="text-xs font-bold text-foreground mt-3">
+                {latestAssessment.targetCarbsGrams}g Carbohydrates
+              </span>
+              <span className="text-[10px] text-muted-foreground mt-0.5">
+                {latestAssessment.targetCarbsGrams * 4} kcal &bull; Glycogen & daily energy
+              </span>
+            </div>
 
-          {/* Healthy Fats Ratio */}
-          <div className="flex flex-col items-center p-4 rounded-2xl bg-muted/20 border border-border/60">
-            <ProgressRing
-              value={20}
-              size={76}
-              strokeWidth={7}
-              circleClassName="text-cyan-500"
-            >
-              <span className="text-xs font-black text-foreground">20%</span>
-            </ProgressRing>
-            <span className="text-xs font-bold text-foreground mt-3">Healthy Fats</span>
-            <span className="text-[10px] text-muted-foreground mt-0.5">Hormone balance support</span>
+            {/* Healthy Fats Target */}
+            <div className="flex flex-col items-center p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20">
+              <ProgressRing
+                value={macroPcts.fat}
+                size={76}
+                strokeWidth={7}
+                circleClassName="text-cyan-500"
+              >
+                <span className="text-xs font-black text-foreground">{macroPcts.fat}%</span>
+              </ProgressRing>
+              <span className="text-xs font-bold text-foreground mt-3">
+                {latestAssessment.targetFatGrams}g Fats
+              </span>
+              <span className="text-[10px] text-muted-foreground mt-0.5">
+                {latestAssessment.targetFatGrams * 9} kcal &bull; Hormonal health support
+              </span>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="text-center py-6 space-y-3">
+            <p className="text-xs text-muted-foreground max-w-md mx-auto">
+              No nutritional calculations recorded yet. Complete your body assessment to generate your personalized daily calorie and macro target breakdown.
+            </p>
+            <Link href="/assessment">
+              <Button size="sm" variant="gradient" className="rounded-xl text-xs font-bold">
+                Perform Assessment
+              </Button>
+            </Link>
+          </div>
+        )}
       </Card>
 
       {/* Prominent Visual AI Coach Banner */}
@@ -388,11 +621,11 @@ function DashboardContent() {
                   FitLife AI Fitness Coach
                 </h3>
                 <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 2 Flagship
+                  Phase 3 Flagship
                 </Badge>
               </div>
               <p className="text-xs text-slate-300 max-w-md leading-relaxed">
-                24/7 conversational coaching reasoning on your Phase 1 physical metrics, available equipment, and dietary restrictions.
+                24/7 conversational coaching reasoning on your physical metrics, BMI, BMR, and fitness objectives.
               </p>
             </div>
           </div>
@@ -417,7 +650,7 @@ function DashboardContent() {
               {t.dashboard.upcomingFeatures}
             </h2>
             <p className="text-xs text-muted-foreground">
-              Visual roadmap preview (Phase 2 modules)
+              Future roadmap previews
             </p>
           </div>
         </div>
@@ -435,7 +668,7 @@ function DashboardContent() {
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
               <div className="absolute top-3 end-3">
                 <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 2
+                  Phase 3+
                 </Badge>
               </div>
               <div className="absolute bottom-3 start-4">
@@ -455,7 +688,7 @@ function DashboardContent() {
               <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground font-semibold">
                 <span className="flex items-center gap-1.5">
                   <Lock className="h-3 w-3 text-amber-500" />
-                  <span>Unlocks in Phase 2</span>
+                  <span>Unlocks in Phase 3</span>
                 </span>
               </div>
             </div>
@@ -473,7 +706,7 @@ function DashboardContent() {
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
               <div className="absolute top-3 end-3">
                 <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 2
+                  Phase 3+
                 </Badge>
               </div>
               <div className="absolute bottom-3 start-4">
@@ -493,7 +726,7 @@ function DashboardContent() {
               <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground font-semibold">
                 <span className="flex items-center gap-1.5">
                   <Lock className="h-3 w-3 text-amber-500" />
-                  <span>Calorie plans activate in Phase 2</span>
+                  <span>Meal plans activate in Phase 3</span>
                 </span>
               </div>
             </div>
@@ -511,7 +744,7 @@ function DashboardContent() {
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
               <div className="absolute top-3 end-3">
                 <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 2
+                  Phase 3+
                 </Badge>
               </div>
               <div className="absolute bottom-3 start-4">
@@ -531,7 +764,7 @@ function DashboardContent() {
               <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground font-semibold">
                 <span className="flex items-center gap-1.5">
                   <Lock className="h-3 w-3 text-amber-500" />
-                  <span>Charts unlock in Phase 2</span>
+                  <span>Charts unlock in Phase 3</span>
                 </span>
               </div>
             </div>
@@ -552,7 +785,7 @@ function DashboardContent() {
                   FitLife {t.common.aiCoach}
                 </h3>
                 <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 2 Preview
+                  Phase 3 Preview
                 </Badge>
               </div>
             </div>
@@ -566,10 +799,10 @@ function DashboardContent() {
               />
               <div className="relative z-10 text-center px-4">
                 <span className="text-xs font-bold text-white drop-shadow">
-                  Phase 2 Architecture Ready
+                  Phase 2 Biometrics Ready
                 </span>
                 <p className="text-[11px] text-emerald-300 mt-1">
-                  Ready to connect with reasoning agent models
+                  Ready to seed conversational coaching in Phase 3
                 </p>
               </div>
             </div>
