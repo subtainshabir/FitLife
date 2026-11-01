@@ -72,20 +72,20 @@ export function BmiIndicator({
   return (
     <div className="space-y-4">
       {/* Top Value Display */}
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5">
         <div>
-          <span className="text-xs uppercase font-extrabold tracking-wider text-muted-foreground block">
+          <span className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider text-muted-foreground block">
             Calculated BMI
           </span>
           <div className="flex items-baseline gap-2 mt-0.5">
-            <span className="text-4xl font-black tracking-tight text-foreground">{bmi}</span>
+            <span className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">{bmi}</span>
             <span className="text-xs font-semibold text-muted-foreground">kg/m²</span>
           </div>
         </div>
 
-        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold border ${info.badgeBg}`}>
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>{info.label}</span>
+        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold border self-start sm:self-auto ${info.badgeBg}`}>
+          <Sparkles className="h-3.5 w-3.5 shrink-0" />
+          <span className="break-words">{info.label}</span>
         </span>
       </div>
 
@@ -112,11 +112,11 @@ export function BmiIndicator({
         </div>
 
         {/* Legend / Range labels */}
-        <div className="flex justify-between text-[10px] font-bold text-muted-foreground mt-2 px-1">
-          <span>&lt;18.5 (Under)</span>
-          <span>18.5 - 24.9 (Normal)</span>
-          <span>25 - 29.9 (Over)</span>
-          <span>30+ (Obese)</span>
+        <div className="flex justify-between text-[9px] sm:text-[10px] font-bold text-muted-foreground mt-2 px-0.5">
+          <span>&lt;18.5</span>
+          <span>18.5-24.9</span>
+          <span>25-29.9</span>
+          <span>&ge;30</span>
         </div>
       </div>
 

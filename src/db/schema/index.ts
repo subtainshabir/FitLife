@@ -6,3 +6,4 @@ export * from "./assessments";
 export * from "./measurements";
 export * from "./foods";
 export * from "./prices";
+export * from "./plans";

@@ -67,7 +67,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto overflow-hidden rounded-3xl border border-border/80 bg-card shadow-2xl grid grid-cols-1 lg:grid-cols-2">
+    <div className="w-full max-w-4xl mx-auto overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card shadow-2xl grid grid-cols-1 lg:grid-cols-2">
       {/* Visual Photography Column */}
       <div className="relative hidden lg:flex flex-col justify-between p-8 bg-slate-950 text-white overflow-hidden">
         <img
@@ -107,7 +107,7 @@ function LoginForm() {
       </div>
 
       {/* Form Column */}
-      <div className="p-6 sm:p-10 flex flex-col justify-center bg-card">
+      <div className="p-4 sm:p-8 md:p-10 flex flex-col justify-center bg-card">
         <div className="space-y-1 mb-6 text-start">
           <div className="lg:hidden inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 mb-2">
             <Dumbbell className="h-3.5 w-3.5" />
@@ -223,7 +223,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <Navbar />
 
-      <main className="flex-1 flex items-center justify-center py-10 px-4 sm:px-6">
+      <main className="flex-1 flex items-center justify-center py-6 sm:py-10 px-3 sm:px-6">
         <Suspense fallback={<div className="text-center p-8 text-xs text-muted-foreground">Loading...</div>}>
           <LoginForm />
         </Suspense>

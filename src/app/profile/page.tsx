@@ -218,16 +218,16 @@ export default function ProfilePage() {
     <div className="flex min-h-screen flex-col bg-background pb-16 md:pb-0 selection:bg-primary selection:text-primary-foreground">
       <DashboardNav />
 
-      <main className="flex-1 container px-4 sm:px-8 py-8 max-w-4xl mx-auto space-y-6">
+      <main className="flex-1 container px-3 sm:px-6 md:px-8 py-6 sm:py-8 pb-24 md:pb-12 max-w-4xl mx-auto space-y-5 sm:space-y-6">
         {/* Header Profile Badge */}
-        <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-card p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-2xl font-black text-white shadow-lg shadow-emerald-500/25">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-xl sm:text-2xl font-black text-white shadow-lg shadow-emerald-500/25 shrink-0">
               {name ? name.charAt(0).toUpperCase() : "A"}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl font-black text-foreground">
+                <h1 className="text-lg sm:text-xl font-black text-foreground">
                   {name || "Athlete"}
                 </h1>
                 <Badge variant="success" className="text-[10px]">
@@ -241,72 +241,72 @@ export default function ProfilePage() {
           </div>
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
-            <Badge variant="outline" className="text-[11px] font-bold">
+            <Badge variant="outline" className="text-[10px] sm:text-[11px] font-bold">
               PostgreSQL 16 &bull; Drizzle ORM
             </Badge>
           </div>
         </div>
 
         {/* Visual Tab Bar with Icons */}
-        <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-muted/30 border border-border/60">
+        <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-2xl bg-muted/30 border border-border/60">
           <button
             type="button"
             onClick={() => setActiveTab("personal")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition-all ${
               activeTab === "personal"
                 ? "bg-background text-foreground shadow-sm ring-1 ring-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <User className="h-4 w-4" />
-            <span>{t.profile.personalTab}</span>
+            <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+            <span className="truncate">{t.profile.personalTab}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("fitness")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition-all ${
               activeTab === "fitness"
                 ? "bg-background text-foreground shadow-sm ring-1 ring-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Target className="h-4 w-4" />
-            <span>{t.profile.fitnessTab}</span>
+            <Target className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+            <span className="truncate">{t.profile.fitnessTab}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("lifestyle")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold transition-all ${
+            className={`flex-1 flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-[11px] sm:text-xs font-bold transition-all ${
               activeTab === "lifestyle"
                 ? "bg-background text-foreground shadow-sm ring-1 ring-border"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Apple className="h-4 w-4" />
-            <span>{t.profile.lifestyleTab}</span>
+            <Apple className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+            <span className="truncate">{t.profile.lifestyleTab}</span>
           </button>
         </div>
 
         {/* Form Container */}
         <form onSubmit={handleSave}>
-          <Card className="border-border/80 shadow-xl bg-card rounded-3xl overflow-hidden">
+          <Card className="border-border/80 shadow-xl bg-card rounded-2xl sm:rounded-3xl overflow-hidden">
             {success && (
-              <div className="m-6 mb-0 flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/25 p-3 text-xs text-emerald-600 dark:text-emerald-400 animate-in fade-in">
+              <div className="m-4 sm:m-6 mb-0 flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/25 p-3 text-xs text-emerald-600 dark:text-emerald-400 animate-in fade-in">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
                 <span>{success}</span>
               </div>
             )}
 
             {error && (
-              <div className="m-6 mb-0 flex items-center gap-2 rounded-xl bg-destructive/10 border border-destructive/25 p-3 text-xs text-destructive animate-in fade-in">
+              <div className="m-4 sm:m-6 mb-0 flex items-center gap-2 rounded-xl bg-destructive/10 border border-destructive/25 p-3 text-xs text-destructive animate-in fade-in">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
-            <CardContent className="p-6 sm:p-8 space-y-6">
+            <CardContent className="p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
               {/* TAB 1: Personal Attributes */}
               {activeTab === "personal" && (
                 <div className="space-y-4">
@@ -514,7 +514,7 @@ export default function ProfilePage() {
                     <Label className="text-xs font-bold text-foreground">
                       {t.onboarding.fitnessExperience}
                     </Label>
-                    <div className="grid grid-cols-3 gap-2.5">
+                    <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 sm:gap-2.5">
                       {FITNESS_EXPERIENCES.map((exp) => {
                         const isSelected = fitnessExperience === exp;
                         return (
@@ -522,7 +522,7 @@ export default function ProfilePage() {
                             key={exp}
                             type="button"
                             onClick={() => setFitnessExperience(exp)}
-                            className={`p-3 rounded-2xl border text-center text-xs font-bold capitalize transition-all ${
+                            className={`p-2.5 sm:p-3 rounded-2xl border text-center text-xs font-bold capitalize transition-all ${
                               isSelected
                                 ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 ring-2 ring-emerald-500/30"
                                 : "border-border/80 bg-muted/20 text-muted-foreground hover:bg-muted/40"
@@ -680,12 +680,12 @@ export default function ProfilePage() {
               )}
             </CardContent>
 
-            <CardFooter className="flex items-center justify-end border-t border-border/60 p-4 sm:px-8 bg-muted/10">
+            <CardFooter className="flex items-center justify-end border-t border-border/60 p-3.5 sm:p-4 sm:px-8 bg-muted/10">
               <Button
                 type="submit"
                 variant="gradient"
                 disabled={saving}
-                className="gap-2 text-xs font-extrabold px-6 rounded-xl shadow-lg shadow-emerald-500/20"
+                className="w-full xs:w-auto gap-2 text-xs font-extrabold px-6 rounded-xl shadow-lg shadow-emerald-500/20"
               >
                 {saving ? (
                   <span className="flex items-center gap-2">

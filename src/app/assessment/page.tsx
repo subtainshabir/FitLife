@@ -279,18 +279,18 @@ export default function AssessmentPage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <DashboardNav />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-8 py-8 max-w-7xl">
+      <main className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 py-6 sm:py-8 pb-24 md:pb-12 max-w-7xl">
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                <Calculator className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                <Calculator className="h-3.5 w-3.5 shrink-0" />
                 <span>{t.assessment.calculatorBadge}</span>
               </span>
               <span className="text-xs text-muted-foreground">Mifflin-St Jeor &bull; WHO BMI</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-1">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight mt-1 break-words">
               {t.assessment.title}
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
@@ -299,7 +299,7 @@ export default function AssessmentPage() {
           </div>
 
           {/* Unit Toggle Buttons */}
-          <div className="flex items-center gap-1.5 bg-muted/70 p-1.5 rounded-2xl border border-border/80 self-start md:self-auto">
+          <div className="flex items-center gap-1.5 bg-muted/70 p-1 sm:p-1.5 rounded-2xl border border-border/80 self-start md:self-auto">
             <button
               type="button"
               onClick={() => handleUnitToggle("metric")}
@@ -327,8 +327,8 @@ export default function AssessmentPage() {
 
         {/* Success / Error Banners */}
         {successMessage && (
-          <div className="mb-6 flex items-center justify-between rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-700 dark:text-emerald-300 animate-in fade-in">
-            <div className="flex items-center gap-3">
+          <div className="mb-6 flex items-center justify-between rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 sm:p-4 text-emerald-700 dark:text-emerald-300 animate-in fade-in">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
               <span className="text-xs font-bold">{successMessage}</span>
             </div>
@@ -342,19 +342,19 @@ export default function AssessmentPage() {
         )}
 
         {error && (
-          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-4 text-destructive animate-in fade-in text-xs font-bold">
+          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-destructive/30 bg-destructive/10 p-3.5 sm:p-4 text-destructive animate-in fade-in text-xs font-bold">
             <AlertTriangle className="h-5 w-5 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           {/* LEFT COLUMN: Input Form Card (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
-            <Card className="rounded-3xl border-border/80 shadow-md">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-base font-extrabold flex items-center gap-2">
-                  <Activity className="h-5 w-5 text-primary" />
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
+            <Card className="rounded-2xl sm:rounded-3xl border-border/80 shadow-md">
+              <CardHeader className="p-4 sm:p-6 pb-3 sm:pb-4">
+                <CardTitle className="text-sm sm:text-base font-extrabold flex items-center gap-2">
+                  <Activity className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
                   <span>{t.assessment.measurementsTitle}</span>
                 </CardTitle>
                 <CardDescription className="text-xs">
@@ -362,7 +362,7 @@ export default function AssessmentPage() {
                 </CardDescription>
               </CardHeader>
 
-              <CardContent>
+              <CardContent className="p-4 sm:p-6 pt-0 sm:pt-0">
                 <form onSubmit={handleCalculate} className="space-y-4">
                   {/* Age & Biological Sex row */}
                   <div className="grid grid-cols-2 gap-3">
@@ -642,19 +642,19 @@ export default function AssessmentPage() {
             {currentAssessment ? (
               <>
                 {/* 1. BMI Card */}
-                <Card className="rounded-3xl border-border/80 shadow-md overflow-hidden">
-                  <CardHeader className="bg-muted/30 pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
+                <Card className="rounded-2xl sm:rounded-3xl border-border/80 shadow-md overflow-hidden">
+                  <CardHeader className="bg-muted/30 p-3.5 sm:p-5 pb-3 border-b border-border/60">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <CardTitle className="text-sm font-extrabold flex items-center gap-2">
-                        <HeartPulse className="h-4 w-4 text-emerald-500" />
+                        <HeartPulse className="h-4 w-4 text-emerald-500 shrink-0" />
                         <span>{t.assessment.bmiTitle}</span>
                       </CardTitle>
                       <Badge variant="outline" className="text-[10px]">
-                        WHO Adult Screening Standard
+                        WHO Adult Standard
                       </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-5">
+                  <CardContent className="p-4 sm:p-6 pt-4 sm:pt-5">
                     <BmiIndicator
                       bmi={currentAssessment.bmi}
                       category={currentAssessment.bmiCategory}
@@ -666,20 +666,20 @@ export default function AssessmentPage() {
                 </Card>
 
                 {/* 2. BMR & TDEE Large Numbers Card */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {/* BMR Card */}
-                  <Card className="rounded-3xl border-border/80 shadow-sm p-5 space-y-3">
+                  <Card className="rounded-2xl sm:rounded-3xl border-border/80 shadow-sm p-4 sm:p-5 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground truncate">
                         {t.assessment.bmrTitle}
                       </span>
-                      <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+                      <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                         <Zap className="h-4 w-4" />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-3xl sm:text-4xl font-black text-foreground">
+                        <span className="text-2xl sm:text-4xl font-black text-foreground truncate">
                           {currentAssessment.bmr.toLocaleString()}
                         </span>
                         <span className="text-xs font-bold text-muted-foreground">kcal / day</span>
@@ -688,24 +688,24 @@ export default function AssessmentPage() {
                         {t.assessment.bmrExplanation}
                       </span>
                     </div>
-                    <div className="rounded-xl border border-border/60 bg-muted/40 p-2 text-[10px] text-muted-foreground font-mono">
+                    <div className="rounded-xl border border-border/60 bg-muted/40 p-2 text-[10px] text-muted-foreground font-mono break-all">
                       {calculationNotes.formulaExplanation || "Mifflin-St Jeor: 10×W + 6.25×H - 5×A ± S"}
                     </div>
                   </Card>
 
                   {/* TDEE Card */}
-                  <Card className="rounded-3xl border-border/80 shadow-sm p-5 space-y-3">
+                  <Card className="rounded-2xl sm:rounded-3xl border-border/80 shadow-sm p-4 sm:p-5 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground truncate">
                         {t.assessment.tdeeTitle}
                       </span>
-                      <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                      <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                         <Flame className="h-4 w-4" />
                       </div>
                     </div>
                     <div>
                       <div className="flex items-baseline gap-1.5">
-                        <span className="text-3xl sm:text-4xl font-black text-foreground">
+                        <span className="text-2xl sm:text-4xl font-black text-foreground truncate">
                           {currentAssessment.tdee.toLocaleString()}
                         </span>
                         <span className="text-xs font-bold text-muted-foreground">kcal / day</span>
@@ -714,18 +714,18 @@ export default function AssessmentPage() {
                         {t.assessment.tdeeExplanation}
                       </span>
                     </div>
-                    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-2 text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold">
-                      Activity Multiplier applied: {currentAssessment.activityLevel.replace(/_/g, " ")}
+                    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-2 text-[10px] text-emerald-700 dark:text-emerald-300 font-semibold truncate">
+                      Multiplier: {currentAssessment.activityLevel.replace(/_/g, " ")}
                     </div>
                   </Card>
                 </div>
 
                 {/* 3. Nutrition Targets Card */}
-                <Card className="rounded-3xl border-border/80 shadow-md overflow-hidden">
-                  <CardHeader className="bg-muted/30 pb-3 border-b border-border/60">
-                    <div className="flex items-center justify-between">
+                <Card className="rounded-2xl sm:rounded-3xl border-border/80 shadow-md overflow-hidden">
+                  <CardHeader className="bg-muted/30 p-3.5 sm:p-5 pb-3 border-b border-border/60">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       <CardTitle className="text-sm font-extrabold flex items-center gap-2">
-                        <Sparkles className="h-4 w-4 text-emerald-500" />
+                        <Sparkles className="h-4 w-4 text-emerald-500 shrink-0" />
                         <span>{t.assessment.nutritionTitle}</span>
                       </CardTitle>
                       <Badge variant="outline" className="text-[10px]">
@@ -733,7 +733,7 @@ export default function AssessmentPage() {
                       </Badge>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-5">
+                  <CardContent className="p-4 sm:p-6 pt-4 sm:pt-5">
                     <MacroBreakdown
                       dailyCalories={currentAssessment.targetCalories}
                       protein={{
@@ -783,7 +783,7 @@ export default function AssessmentPage() {
 
                 <div className="divide-y divide-border/60">
                   {history.slice(0, 5).map((item) => (
-                    <div key={item.id} className="py-3 flex items-center justify-between text-xs">
+                    <div key={item.id} className="py-3 flex flex-col xs:flex-row xs:items-center justify-between gap-1 xs:gap-2 text-xs">
                       <div>
                         <div className="font-bold text-foreground">
                           {new Date(item.createdAt).toLocaleDateString(undefined, {
@@ -794,7 +794,7 @@ export default function AssessmentPage() {
                           {item.weight} kg &bull; BMI: {item.bmi} ({item.bmiCategory})
                         </span>
                       </div>
-                      <div className="text-end">
+                      <div className="text-start xs:text-end">
                         <span className="font-extrabold text-foreground">
                           {item.targetCalories} kcal
                         </span>

@@ -171,18 +171,18 @@ function LocalFoodPricesContent() {
     <div className="min-h-screen bg-background flex flex-col">
       <DashboardNav />
 
-      <main className="flex-1 py-8 px-4 sm:px-8 max-w-7xl mx-auto w-full space-y-8">
+      <main className="flex-1 py-6 sm:py-8 px-3 sm:px-6 md:px-8 pb-24 md:pb-12 max-w-7xl mx-auto w-full space-y-6 sm:space-y-8">
         {/* HERO BANNER */}
-        <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-muted/40 p-6 sm:p-8 shadow-xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-muted/40 p-4 sm:p-6 md:p-8 shadow-xl">
           <div className="absolute -top-20 -end-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 rounded-xl bg-teal-500/15 border border-teal-500/30 px-3 py-1 text-xs font-bold text-teal-600 dark:text-teal-400">
-                <MapPin className="h-3.5 w-3.5" />
+                <MapPin className="h-3.5 w-3.5 shrink-0" />
                 <span>Pakistan Local Food Market Intelligence</span>
               </div>
-              <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-foreground">
+              <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground break-words">
                 {t.foodPricing.title}
               </h1>
               <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl leading-relaxed">
@@ -190,19 +190,19 @@ function LocalFoodPricesContent() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <div className="flex flex-wrap items-center gap-2 shrink-0 w-full sm:w-auto">
               <Button
                 variant="gradient"
                 size="sm"
                 onClick={() => setShowSubmitModal(true)}
-                className="h-9 gap-1.5 font-bold text-xs rounded-xl shadow-md shadow-emerald-500/20"
+                className="h-9 gap-1.5 font-bold text-xs rounded-xl shadow-md shadow-emerald-500/20 flex-1 sm:flex-initial"
               >
                 <PlusCircle className="h-4 w-4" />
                 <span>Submit Local Price</span>
               </Button>
 
-              <Link href="/calculator">
-                <Button variant="outline" size="sm" className="h-9 gap-1.5 font-bold text-xs rounded-xl">
+              <Link href="/calculator" className="flex-1 sm:flex-initial">
+                <Button variant="outline" size="sm" className="h-9 w-full gap-1.5 font-bold text-xs rounded-xl">
                   <Calculator className="h-4 w-4 text-emerald-500" />
                   <span>{t.common.calculator}</span>
                 </Button>
@@ -612,8 +612,8 @@ function LocalFoodPricesContent() {
 
         {/* COMMUNITY PRICE SUBMISSION MODAL */}
         {showSubmitModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in">
-            <div className="w-full max-w-lg rounded-3xl border border-emerald-500/30 bg-card p-6 sm:p-8 shadow-2xl relative">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-3 sm:p-4 animate-in fade-in">
+            <div className="w-[calc(100vw-2rem)] sm:max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-card p-4 sm:p-6 md:p-8 shadow-2xl relative">
               <h3 className="text-lg font-black text-foreground mb-1">
                 Submit Local Food Price
               </h3>

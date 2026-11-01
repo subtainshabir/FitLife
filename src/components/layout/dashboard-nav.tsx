@@ -54,6 +54,12 @@ export function DashboardNav() {
       functional: true,
     },
     {
+      name: t.common.nutrition,
+      href: "/nutrition",
+      icon: Sparkles,
+      functional: true,
+    },
+    {
       name: t.common.foods,
       href: "/foods",
       icon: Utensils,
@@ -135,11 +141,10 @@ export function DashboardNav() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                      isActive
+                    className={`relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${isActive
                         ? "bg-primary text-primary-foreground shadow-sm shadow-primary/25"
                         : "text-foreground/80 hover:bg-muted/60 hover:text-foreground"
-                    }`}
+                      }`}
                   >
                     <Icon className="h-4 w-4" />
                     <span>{item.name}</span>
@@ -150,12 +155,12 @@ export function DashboardNav() {
           </div>
 
           {/* Controls & Quick Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Visual AI Coach Callout */}
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            {/* Visual AI Coach Callout - Visible on desktop */}
             <button
               type="button"
               onClick={() => setShowAiModal(true)}
-              className="relative inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-cyan-500/15 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:border-emerald-500/60 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="hidden lg:inline-flex relative items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-cyan-500/15 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:border-emerald-500/60 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -251,11 +256,10 @@ export function DashboardNav() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded-lg transition-colors ${
-                      isActive
+                    className={`flex items-center gap-2.5 px-3 py-2 text-xs font-semibold rounded-lg transition-colors ${isActive
                         ? "bg-primary text-primary-foreground font-bold shadow-sm"
                         : "text-foreground hover:bg-muted"
-                    }`}
+                      }`}
                   >
                     <Icon className="h-4 w-4" />
                     <span>{item.name}</span>
@@ -295,84 +299,96 @@ export function DashboardNav() {
       </header>
 
       {/* Floating Bottom Nav for Mobile Screens */}
-      <div className="md:hidden fixed bottom-0 start-0 end-0 z-40 bg-card/95 backdrop-blur-xl border-t border-border/80 px-2 py-1.5 shadow-2xl flex items-center justify-around">
+      <div className="md:hidden fixed bottom-0 start-0 end-0 z-40 bg-card/95 backdrop-blur-xl border-t border-border/80 px-1 py-1 shadow-2xl flex items-center justify-around h-14">
         <Link
           href="/dashboard"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname === "/dashboard"
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <Home className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.home}</span>
+          <Home className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.home}</span>
         </Link>
 
         <Link
           href="/assessment"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname === "/assessment"
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <Calculator className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.assessment}</span>
+          <Calculator className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.assessment}</span>
         </Link>
 
         <Link
           href="/goals"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname === "/goals"
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <Target className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.goals}</span>
+          <Target className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.goals}</span>
+        </Link>
+
+        <Link
+          href="/nutrition"
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
+            pathname === "/nutrition"
+              ? "text-primary font-bold"
+              : "text-muted-foreground hover:text-foreground"
+            }`}
+        >
+          <Sparkles className="h-4 w-4 shrink-0 text-emerald-500" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.nutrition}</span>
         </Link>
 
         <Link
           href="/foods"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname.startsWith("/foods")
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <Utensils className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.foods}</span>
+          <Utensils className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.foods}</span>
         </Link>
 
         <Link
           href="/prices"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname === "/prices"
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <Building className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.prices}</span>
+          <Building className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.prices}</span>
         </Link>
 
         <Link
           href="/profile"
-          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+          className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
             pathname === "/profile"
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
-          }`}
+            }`}
         >
-          <User className="h-4 w-4" />
-          <span className="text-[10px]">{t.common.profile}</span>
+          <User className="h-4 w-4 shrink-0" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.profile}</span>
         </Link>
       </div>
 
       {/* AI Coach Visual Preview Modal */}
       {showAiModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-md rounded-3xl border border-emerald-500/30 bg-card p-6 shadow-2xl relative text-start overflow-hidden">
+          <div className="w-[calc(100vw-2rem)] max-w-md rounded-3xl border border-emerald-500/30 bg-card p-5 sm:p-6 shadow-2xl relative text-start overflow-hidden max-h-[90vh] overflow-y-auto">
             {/* Top decorative gradient glow */}
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 

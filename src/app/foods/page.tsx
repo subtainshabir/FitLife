@@ -142,18 +142,18 @@ function FoodExplorerContent() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <DashboardNav />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-8 py-8 max-w-7xl">
+      <main className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 py-6 sm:py-8 pb-24 md:pb-12 max-w-7xl">
         {/* Header Hero */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                <Apple className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                <Apple className="h-3.5 w-3.5 shrink-0" />
                 <span>Phase 3: Pakistani Food & Local Pricing</span>
               </span>
               <span className="text-xs text-muted-foreground">FCT Pakistan &bull; DC Rate Lists</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-1">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight mt-1 break-words">
               {t.foodExplorer.title}
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
@@ -179,7 +179,7 @@ function FoodExplorerContent() {
         </div>
 
         {/* Search & City Filter Bar */}
-        <div className="bg-card border border-border/80 rounded-3xl p-4 sm:p-5 shadow-sm mb-6 space-y-4">
+        <div className="bg-card border border-border/80 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-sm mb-6 space-y-4">
           <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row gap-3">
             <div className="relative flex-1">
               <Search className={`absolute ${isRtl ? "right-3.5" : "left-3.5"} top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground`} />

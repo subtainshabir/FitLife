@@ -162,19 +162,19 @@ function DashboardContent() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-emerald-950/40" />
 
-        <div className="relative z-10 p-6 sm:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="max-w-xl space-y-3">
+        <div className="relative z-10 p-4 sm:p-6 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
+          <div className="max-w-xl space-y-2.5 sm:space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/20 px-3 py-0.5 text-[11px] font-bold text-emerald-300 backdrop-blur-md">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/20 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-emerald-300 backdrop-blur-md">
                 <Flame className="h-3.5 w-3.5 text-emerald-400 animate-pulse" />
-                <span>Phase 2 Active: Biometrics & Goals</span>
+                <span>Phase 2 Biometrics & Goals</span>
               </span>
-              <span className="text-xs text-slate-300">
-                PostgreSQL 16 &bull; Verified Calculations
+              <span className="text-[11px] sm:text-xs text-slate-300">
+                PostgreSQL 16 &bull; Verified
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white drop-shadow">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-black tracking-tight text-white drop-shadow break-words">
               {t.dashboard.greeting},{" "}
               <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 bg-clip-text text-transparent">
                 {userName}
@@ -186,16 +186,16 @@ function DashboardContent() {
             </p>
 
             {/* Quick Action Navigation Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5 pt-2">
-              <Link href="/assessment">
-                <Button size="sm" variant="gradient" className="gap-2 text-xs font-bold rounded-xl shadow-md shadow-emerald-500/25">
-                  <Calculator className="h-3.5 w-3.5" />
+            <div className="flex flex-wrap items-center gap-2 pt-1 sm:pt-2">
+              <Link href="/assessment" className="w-full xs:w-auto">
+                <Button size="sm" variant="gradient" className="w-full xs:w-auto gap-2 text-xs font-bold rounded-xl shadow-md shadow-emerald-500/25">
+                  <Calculator className="h-3.5 w-3.5 shrink-0" />
                   <span>{t.dashboard.takeAssessmentNow}</span>
                 </Button>
               </Link>
-              <Link href="/goals">
-                <Button size="sm" variant="outline" className="gap-2 text-xs font-semibold rounded-xl text-white border-white/20 hover:bg-white/10">
-                  <Target className="h-3.5 w-3.5 text-emerald-400" />
+              <Link href="/goals" className="w-full xs:w-auto">
+                <Button size="sm" variant="outline" className="w-full xs:w-auto gap-2 text-xs font-semibold rounded-xl text-white border-white/20 hover:bg-white/10">
+                  <Target className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                   <span>{t.dashboard.setGoalNow}</span>
                 </Button>
               </Link>
@@ -203,19 +203,19 @@ function DashboardContent() {
           </div>
 
           {/* Biometric Status Summary Pill */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex items-center gap-4 shrink-0 max-w-xs">
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-3 sm:p-4 flex items-center gap-3 sm:gap-4 shrink-0 w-full md:w-auto max-w-full sm:max-w-xs">
             <ProgressRing
               value={latestAssessment && activeGoal ? 100 : latestAssessment || profile ? 65 : 25}
-              size={64}
-              strokeWidth={6}
+              size={56}
+              strokeWidth={5}
               circleClassName="text-emerald-400"
             >
-              <span className="text-xs text-white font-extrabold">
+              <span className="text-[11px] sm:text-xs text-white font-extrabold">
                 {latestAssessment && activeGoal ? "100%" : latestAssessment || profile ? "65%" : "25%"}
               </span>
             </ProgressRing>
-            <div>
-              <span className="text-xs font-bold text-white block">
+            <div className="min-w-0">
+              <span className="text-xs font-bold text-white block truncate">
                 {latestAssessment && activeGoal
                   ? "Calibrated & Active Goal"
                   : latestAssessment
@@ -224,7 +224,7 @@ function DashboardContent() {
                   ? "Profile Ready"
                   : "Calibration Needed"}
               </span>
-              <span className="text-[11px] text-slate-300 block mt-0.5">
+              <span className="text-[10px] sm:text-[11px] text-slate-300 block mt-0.5 line-clamp-2">
                 {latestAssessment && activeGoal
                   ? "Track your weekly progress"
                   : latestAssessment
@@ -256,38 +256,38 @@ function DashboardContent() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
           {/* 1. CURRENT WEIGHT CARD */}
-          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider truncate">
                 {t.dashboard.weight}
               </span>
-              <div className="h-8 w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                <Scale className="h-4 w-4" />
+              <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                <Scale className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
             </div>
 
             {currentWeightValue !== null ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-foreground truncate">
                     {currentWeightValue}
                   </span>
                   <span className="text-xs font-bold text-muted-foreground">kg</span>
                 </div>
-                <span className="text-[10px] text-muted-foreground mt-1 block">
+                <span className="text-[10px] text-muted-foreground mt-1 block truncate">
                   {kgToLbs(currentWeightValue)} lbs &bull; Live Metric
                 </span>
               </>
             ) : (
               <div className="space-y-2">
-                <span className="text-sm font-semibold text-muted-foreground block">
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground block truncate">
                   Not Recorded
                 </span>
                 <Link href="/assessment">
                   <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
-                    Record Weight
+                    Record
                   </Button>
                 </Link>
               </div>
@@ -295,31 +295,31 @@ function DashboardContent() {
           </div>
 
           {/* 2. TARGET WEIGHT CARD */}
-          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider truncate">
                 {t.dashboard.targetWeight}
               </span>
-              <div className="h-8 w-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
-                <Target className="h-4 w-4" />
+              <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+                <Target className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
             </div>
 
             {targetWeightValue !== null ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-emerald-600 dark:text-emerald-400 truncate">
                     {targetWeightValue}
                   </span>
                   <span className="text-xs font-bold text-muted-foreground">kg</span>
                 </div>
-                <span className="text-[10px] text-muted-foreground mt-1 block">
-                  {currentWeightValue ? `${Math.round(Math.abs(targetWeightValue - currentWeightValue) * 10) / 10} kg difference` : "Active Target"}
+                <span className="text-[10px] text-muted-foreground mt-1 block truncate">
+                  {currentWeightValue ? `${Math.round(Math.abs(targetWeightValue - currentWeightValue) * 10) / 10} kg diff` : "Active Target"}
                 </span>
               </>
             ) : (
               <div className="space-y-2">
-                <span className="text-sm font-semibold text-muted-foreground block">
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground block truncate">
                   No Goal Target
                 </span>
                 <Link href="/goals">
@@ -332,38 +332,38 @@ function DashboardContent() {
           </div>
 
           {/* 3. BMI CARD */}
-          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider truncate">
                 {t.dashboard.currentBmi}
               </span>
-              <div className="h-8 w-8 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
-                <HeartPulse className="h-4 w-4" />
+              <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+                <HeartPulse className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
             </div>
 
             {bmiValue !== null ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-foreground truncate">
                     {bmiValue}
                   </span>
                   <span className="text-xs font-bold text-muted-foreground">kg/m²</span>
                 </div>
                 <div className="mt-1 flex items-center gap-1.5">
-                  <Badge variant="outline" className="text-[9px] capitalize px-1.5 py-0">
+                  <Badge variant="outline" className="text-[9px] capitalize px-1.5 py-0 truncate">
                     {latestAssessment?.bmiCategory?.replace(/_/g, " ")}
                   </Badge>
                 </div>
               </>
             ) : (
               <div className="space-y-2">
-                <span className="text-sm font-semibold text-muted-foreground block">
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground block truncate">
                   Uncalculated
                 </span>
                 <Link href="/assessment">
                   <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
-                    Calculate BMI
+                    Calculate
                   </Button>
                 </Link>
               </div>
@@ -371,36 +371,36 @@ function DashboardContent() {
           </div>
 
           {/* 4. DAILY CALORIE TARGET CARD */}
-          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-5 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+          <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-card p-3 sm:p-4 md:p-5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-wider truncate">
                 {t.dashboard.dailyCalories}
               </span>
-              <div className="h-8 w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center">
-                <Flame className="h-4 w-4" />
+              <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                <Flame className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </div>
             </div>
 
             {dailyCaloriesValue !== null ? (
               <>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl sm:text-3xl font-black text-foreground">
+                  <span className="text-xl sm:text-2xl md:text-3xl font-black text-foreground truncate">
                     {dailyCaloriesValue.toLocaleString()}
                   </span>
                   <span className="text-xs font-bold text-muted-foreground">kcal</span>
                 </div>
-                <span className="text-[10px] text-muted-foreground mt-1 block">
+                <span className="text-[10px] text-muted-foreground mt-1 block truncate">
                   {latestAssessment?.targetProteinGrams}g P &bull; {latestAssessment?.targetCarbsGrams}g C &bull; {latestAssessment?.targetFatGrams}g F
                 </span>
               </>
             ) : (
               <div className="space-y-2">
-                <span className="text-sm font-semibold text-muted-foreground block">
+                <span className="text-xs sm:text-sm font-semibold text-muted-foreground block truncate">
                   Uncalculated
                 </span>
                 <Link href="/assessment">
                   <Button size="sm" variant="outline" className="h-7 text-[10px] font-bold px-2 rounded-lg">
-                    Get Macro Split
+                    Get Macros
                   </Button>
                 </Link>
               </div>
@@ -411,18 +411,18 @@ function DashboardContent() {
 
       {/* ACTIVE FITNESS GOAL & PROGRESS HERO BANNER */}
       {activeGoal ? (
-        <Card className="rounded-3xl border-emerald-500/30 bg-gradient-to-br from-card via-card to-emerald-500/5 shadow-md p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <Card className="rounded-2xl sm:rounded-3xl border-emerald-500/30 bg-gradient-to-br from-card via-card to-emerald-500/5 shadow-md p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6">
             <div className="space-y-3">
               <div className="flex items-center gap-2.5">
-                <div className="h-10 w-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-sm">
-                  <Target className="h-5 w-5" />
+                <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-sm shrink-0">
+                  <Target className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                     {t.dashboard.activeGoal}
                   </span>
-                  <h3 className="text-base font-extrabold text-foreground">
+                  <h3 className="text-sm sm:text-base font-extrabold text-foreground">
                     {t.goals[activeGoal.goalType] || activeGoal.goalType}
                   </h3>
                 </div>
@@ -445,14 +445,14 @@ function DashboardContent() {
               </div>
 
               {/* Timeline info */}
-              <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
-                  <Calendar className="h-3.5 w-3.5" />
+                  <Calendar className="h-3.5 w-3.5 shrink-0" />
                   <span>Started: {new Date(activeGoal.startDate).toLocaleDateString()}</span>
                 </span>
                 {activeGoal.targetDate && (
                   <span className="flex items-center gap-1 font-semibold text-foreground">
-                    <Clock className="h-3.5 w-3.5 text-emerald-500" />
+                    <Clock className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                     <span>Target Date: {new Date(activeGoal.targetDate).toLocaleDateString()}</span>
                   </span>
                 )}
@@ -465,11 +465,11 @@ function DashboardContent() {
             </div>
 
             {/* Circular Ring and Link */}
-            <div className="flex flex-col items-center sm:items-end gap-3 shrink-0">
+            <div className="flex flex-row sm:flex-col items-center justify-between sm:justify-center sm:items-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border/40">
               <ProgressRing
                 value={goalProgress?.percentage ?? 0}
-                size={76}
-                strokeWidth={7}
+                size={64}
+                strokeWidth={6}
                 circleClassName="text-emerald-500"
               >
                 <span className="text-xs font-black text-foreground">
@@ -477,7 +477,7 @@ function DashboardContent() {
                 </span>
               </ProgressRing>
 
-              <Link href="/goals">
+              <Link href="/goals" className="w-auto">
                 <Button size="sm" variant="outline" className="rounded-xl text-xs font-bold gap-1">
                   <span>Manage Goal</span>
                   <ChevronRight className="h-3.5 w-3.5" />
@@ -488,7 +488,7 @@ function DashboardContent() {
         </Card>
       ) : (
         /* Empty State if no active goal */
-        <Card className="rounded-3xl border-dashed border-2 border-border/80 p-6 text-center space-y-3">
+        <Card className="rounded-2xl sm:rounded-3xl border-dashed border-2 border-border/80 p-4 sm:p-6 text-center space-y-3">
           <div className="h-12 w-12 mx-auto rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
             <Target className="h-6 w-6" />
           </div>
@@ -508,14 +508,14 @@ function DashboardContent() {
       )}
 
       {/* NUTRITION MACRO BLUEPRINT (Rendered from real assessment or empty state) */}
-      <Card className="border-border/80 bg-card rounded-3xl p-6 shadow-sm overflow-hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/60 pb-4 mb-6">
+      <Card className="border-border/80 bg-card rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 border-b border-border/60 pb-4 mb-5 sm:mb-6">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md shadow-orange-500/20">
-              <Apple className="h-5 w-5" />
+            <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center shadow-md shadow-orange-500/20 shrink-0">
+              <Apple className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h3 className="text-base font-extrabold text-foreground">
+              <h3 className="text-sm sm:text-base font-extrabold text-foreground">
                 Daily Estimated Nutrition Targets
               </h3>
               <p className="text-xs text-muted-foreground">
@@ -527,7 +527,7 @@ function DashboardContent() {
           </div>
 
           {latestAssessment && (
-            <Link href="/assessment">
+            <Link href="/assessment" className="self-end sm:self-auto">
               <Button size="sm" variant="outline" className="rounded-xl text-xs font-semibold gap-1">
                 <span>Recalculate</span>
                 <ChevronRight className="h-3.5 w-3.5" />
@@ -537,7 +537,7 @@ function DashboardContent() {
         </div>
 
         {latestAssessment ? (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 text-center">
             {/* Protein Target */}
             <div className="flex flex-col items-center p-4 rounded-2xl bg-emerald-500/5 border border-emerald-500/20">
               <ProgressRing
@@ -607,17 +607,17 @@ function DashboardContent() {
       </Card>
 
       {/* Prominent Visual AI Coach Banner */}
-      <div className="relative overflow-hidden rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 p-6 sm:p-8 text-white shadow-2xl">
+      <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border-2 border-emerald-500/40 bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 p-4 sm:p-6 md:p-8 text-white shadow-2xl">
         <div className="absolute top-0 end-0 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/30">
-              <Sparkles className="h-8 w-8" />
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 text-white flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/30">
+              <Sparkles className="h-6 w-6 sm:h-8 sm:w-8" />
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h3 className="text-lg font-black text-white">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <h3 className="text-base sm:text-lg font-black text-white">
                   FitLife AI Fitness Coach
                 </h3>
                 <Badge variant="comingSoon" className="text-[10px]">
@@ -634,7 +634,7 @@ function DashboardContent() {
             type="button"
             variant="default"
             onClick={() => setShowAiModal(true)}
-            className="w-full md:w-auto text-xs font-bold px-6 py-3 rounded-xl bg-white text-slate-950 hover:bg-slate-100 shadow-lg shadow-black/30"
+            className="w-full md:w-auto text-xs font-bold px-6 py-2.5 sm:py-3 rounded-xl bg-white text-slate-950 hover:bg-slate-100 shadow-lg shadow-black/30 shrink-0"
           >
             <span>Preview AI Coach</span>
             <ArrowRight className={`h-4 w-4 ms-2 ${isRtl ? "rotate-180" : ""}`} />
@@ -789,6 +789,61 @@ function DashboardContent() {
         </div>
       </div>
 
+      {/* PHASE 4: AI NUTRITION PLANNER & BUDGET-BASED DIET PLANS */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-black text-foreground">
+                AI Nutrition Planner & Budget Diet Plans
+              </h2>
+              <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold uppercase">
+                Phase 4 Live
+              </Badge>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Automated Pakistani meal schedules tailored to your calorie targets, local city rates, and PKR food budget.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/nutrition">
+              <Button variant="gradient" size="sm" className="h-8 text-xs font-bold rounded-xl gap-1.5 shadow-md shadow-emerald-500/20">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>Open Nutrition Planner</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Nutrition Feature Card Banner */}
+        <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-card to-card p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20">
+              <Sparkles className="h-6 w-6 sm:h-7 sm:w-7" />
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-extrabold text-foreground">
+                  Personalized Pakistani Diet Schedules with Local PKR Costing
+                </h3>
+              </div>
+              <p className="text-xs text-muted-foreground max-w-xl leading-relaxed">
+                Generate 3–6 meal daily schedules, track daily/weekly grocery costs, substitute ingredients for cheaper high-protein staples (like Daal Chana and Farm Eggs), and export interactive shopping checklists.
+              </p>
+            </div>
+          </div>
+
+          <Link href="/nutrition" className="shrink-0 self-end md:self-center">
+            <Button variant="default" size="sm" className="h-10 text-xs font-bold rounded-xl px-5 gap-2 shadow-lg shadow-emerald-500/20">
+              <span>Generate My Meal Plan</span>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+
       {/* Picture-Rich Workout & Wellness Feature Cards */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -919,14 +974,14 @@ function DashboardContent() {
 
       {/* AI Preview Modal */}
       {showAiModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-md rounded-3xl border border-emerald-500/30 bg-card p-6 shadow-2xl relative text-start overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="w-[calc(100vw-2rem)] max-w-md max-h-[90vh] overflow-y-auto rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-card p-4 sm:p-6 shadow-2xl relative text-start">
             <div className="flex items-center gap-3.5 mb-4">
-              <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
-                <Sparkles className="h-6 w-6" />
+              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30 shrink-0">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
               <div>
-                <h3 className="text-base font-extrabold text-foreground">
+                <h3 className="text-sm sm:text-base font-extrabold text-foreground">
                   FitLife {t.common.aiCoach}
                 </h3>
                 <Badge variant="comingSoon" className="text-[10px]">
@@ -935,7 +990,7 @@ function DashboardContent() {
               </div>
             </div>
 
-            <div className="relative rounded-2xl overflow-hidden mb-4 border border-border/80 h-32 bg-slate-900 flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden mb-4 border border-border/80 h-28 sm:h-32 bg-slate-900 flex items-center justify-center">
               <img
                 src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=800&auto=format&fit=crop"
                 alt="AI Fitness Companion"
@@ -975,7 +1030,7 @@ export default function DashboardPage() {
     <div className="flex min-h-screen flex-col bg-background selection:bg-primary selection:text-primary-foreground">
       <DashboardNav />
 
-      <main className="flex-1 container px-4 sm:px-8 py-8 max-w-6xl mx-auto">
+      <main className="flex-1 container px-3 sm:px-6 md:px-8 py-6 sm:py-8 pb-24 md:pb-12 max-w-6xl mx-auto">
         <Suspense fallback={<div className="flex min-h-[50vh] items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
           <DashboardContent />
         </Suspense>

@@ -191,9 +191,9 @@ export default function FoodDetailPage() {
     <div className="min-h-screen bg-background flex flex-col">
       <DashboardNav />
 
-      <main className="flex-1 py-8 px-4 sm:px-8 max-w-7xl mx-auto w-full space-y-8">
+      <main className="flex-1 py-6 sm:py-8 px-3 sm:px-6 md:px-8 pb-24 md:pb-12 max-w-7xl mx-auto w-full space-y-6 sm:space-y-8">
         {/* Navigation Breadcrumb */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2.5">
           <Link
             href="/foods"
             className="inline-flex items-center gap-2 text-xs font-bold text-muted-foreground hover:text-foreground transition-colors group"
@@ -228,7 +228,7 @@ export default function FoodDetailPage() {
 
         {/* Error State */}
         {error && !loading && (
-          <Card className="border-destructive/30 bg-destructive/10 p-8 text-center space-y-4">
+          <Card className="border-destructive/30 bg-destructive/10 p-6 sm:p-8 text-center space-y-4 rounded-2xl sm:rounded-3xl">
             <AlertCircle className="h-12 w-12 text-destructive mx-auto" />
             <h2 className="text-lg font-bold text-foreground">{error}</h2>
             <Link href="/foods">
@@ -242,7 +242,7 @@ export default function FoodDetailPage() {
         {food && !loading && (
           <>
             {/* HERO CARD */}
-            <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-muted/30 p-6 sm:p-8 shadow-xl">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-muted/30 p-4 sm:p-6 md:p-8 shadow-xl">
               <div className="absolute -top-24 -end-24 w-80 h-80 bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">

@@ -260,24 +260,24 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-16 md:pb-0 selection:bg-primary selection:text-primary-foreground">
+    <div className="flex min-h-screen flex-col bg-background pb-20 md:pb-0 selection:bg-primary selection:text-primary-foreground">
       <DashboardNav />
 
-      <main className="flex-1 py-8 px-4 sm:px-6">
+      <main className="flex-1 py-6 sm:py-8 px-3 sm:px-6 pb-24 md:pb-12">
         <div className="max-w-2xl mx-auto">
           {/* Visual Header */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-5 sm:mb-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-2">
               <Sparkles className="h-3.5 w-3.5" />
               <span>Step {step} of 4</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight text-foreground break-words">
               {t.onboarding.title}
             </h1>
           </div>
 
           {/* Stepper Progress Bar with Icons */}
-          <div className="mb-6">
+          <div className="mb-5 sm:mb-6">
             <div className="flex items-center justify-between relative px-2">
               <div className="absolute top-1/2 start-4 end-4 -translate-y-1/2 h-1 bg-muted rounded-full -z-0" />
               <div
@@ -293,7 +293,7 @@ export default function OnboardingPage() {
               ].map(({ s, icon: StepIcon }) => (
                 <div
                   key={s}
-                  className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-2xl border-2 transition-all ${
+                  className={`relative z-10 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl border-2 transition-all ${
                     s < step
                       ? "border-emerald-500 bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
                       : s === step
@@ -301,29 +301,42 @@ export default function OnboardingPage() {
                       : "border-border bg-card text-muted-foreground"
                   }`}
                 >
-                  {s < step ? <CheckCircle2 className="h-5 w-5" /> : <StepIcon className="h-4 w-4" />}
+                  {s < step ? <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" /> : <StepIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-between text-[11px] font-bold text-muted-foreground mt-2 px-1">
-              <span>{t.onboarding.step1Title}</span>
-              <span>{t.onboarding.step2Title}</span>
-              <span>{t.onboarding.step3Title}</span>
-              <span>{t.onboarding.step4Title}</span>
+            <div className="flex justify-between items-center text-[10px] sm:text-[11px] font-bold text-muted-foreground mt-2 px-1">
+              {[
+                { s: 1, title: t.onboarding.step1Title },
+                { s: 2, title: t.onboarding.step2Title },
+                { s: 3, title: t.onboarding.step3Title },
+                { s: 4, title: t.onboarding.step4Title },
+              ].map(({ s, title }) => (
+                <span
+                  key={s}
+                  className={`transition-colors text-center px-0.5 truncate max-w-[70px] sm:max-w-none ${
+                    s === step
+                      ? "text-emerald-600 dark:text-emerald-400 font-extrabold"
+                      : "text-muted-foreground hidden xs:inline-block"
+                  }`}
+                >
+                  {title}
+                </span>
+              ))}
             </div>
           </div>
 
           {/* Step Content Container */}
-          <Card className="border-border/80 shadow-2xl bg-card rounded-3xl overflow-hidden">
+          <Card className="border-border/80 shadow-2xl bg-card rounded-2xl sm:rounded-3xl overflow-hidden">
             {error && (
-              <div className="m-6 mb-0 flex items-center gap-2 rounded-xl bg-destructive/10 border border-destructive/25 p-3 text-xs text-destructive animate-in fade-in">
+              <div className="m-4 sm:m-6 mb-0 flex items-center gap-2 rounded-xl bg-destructive/10 border border-destructive/25 p-3 text-xs text-destructive animate-in fade-in">
                 <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
-            <CardContent className="p-6 sm:p-8">
+            <CardContent className="p-4 sm:p-6 md:p-8">
               {/* STEP 1: Personal Attributes */}
               {step === 1 && (
                 <div className="space-y-5">
@@ -535,7 +548,7 @@ export default function OnboardingPage() {
                   </div>
 
                   {/* 3x3 Visual Goal Grid with Icons */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-2.5">
                     {FITNESS_GOALS.map((g) => {
                       const isSelected = fitnessGoal === g;
                       return (
@@ -543,18 +556,18 @@ export default function OnboardingPage() {
                           key={g}
                           type="button"
                           onClick={() => setFitnessGoal(g)}
-                          className={`flex flex-col items-center justify-center p-3.5 rounded-2xl border text-center transition-all ${
+                          className={`flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-2xl border text-center transition-all ${
                             isSelected
                               ? "border-emerald-500 bg-emerald-500/10 text-foreground ring-2 ring-emerald-500/30 shadow-md shadow-emerald-500/10"
                               : "border-border/80 bg-muted/20 hover:bg-muted/50 text-muted-foreground hover:text-foreground"
                           }`}
                         >
-                          <div className={`h-10 w-10 rounded-xl flex items-center justify-center mb-2 transition-transform ${
-                            isSelected ? "bg-emerald-500 text-white scale-110 shadow-sm" : "bg-muted text-muted-foreground"
+                          <div className={`h-9 w-9 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center mb-1.5 sm:mb-2 transition-transform ${
+                            isSelected ? "bg-emerald-500 text-white scale-105 sm:scale-110 shadow-sm" : "bg-muted text-muted-foreground"
                           }`}>
                             {goalIcons[g] || <Activity className="h-5 w-5" />}
                           </div>
-                          <span className="text-xs font-bold line-clamp-1">{t.goals[g] || g}</span>
+                          <span className="text-[11px] sm:text-xs font-bold leading-tight break-words line-clamp-2 px-0.5">{t.goals[g] || g}</span>
                         </button>
                       );
                     })}
@@ -565,7 +578,7 @@ export default function OnboardingPage() {
                     <Label className="text-xs font-bold text-foreground">
                       {t.onboarding.fitnessExperience}
                     </Label>
-                    <div className="grid grid-cols-3 gap-2.5">
+                    <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 sm:gap-2.5">
                       {FITNESS_EXPERIENCES.map((exp) => {
                         const isSelected = fitnessExperience === exp;
                         return (
@@ -573,7 +586,7 @@ export default function OnboardingPage() {
                             key={exp}
                             type="button"
                             onClick={() => setFitnessExperience(exp)}
-                            className={`p-3 rounded-2xl border text-center transition-all ${
+                            className={`p-2.5 sm:p-3 rounded-2xl border text-center transition-all ${
                               isSelected
                                 ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold"
                                 : "border-border/80 bg-muted/20 text-muted-foreground font-semibold hover:bg-muted/40"
@@ -778,20 +791,20 @@ export default function OnboardingPage() {
               )}
             </CardContent>
 
-            <CardFooter className="flex items-center justify-between border-t border-border/60 p-4 sm:px-8 bg-muted/10">
+            <CardFooter className="flex flex-col-reverse xs:flex-row gap-2.5 xs:gap-0 xs:items-center xs:justify-between border-t border-border/60 p-3.5 sm:p-4 sm:px-8 bg-muted/10">
               {step > 1 ? (
                 <Button
                   type="button"
                   variant="outline"
                   onClick={handleBack}
                   disabled={loading}
-                  className="gap-2 text-xs font-bold rounded-xl"
+                  className="w-full xs:w-auto gap-2 text-xs font-bold rounded-xl"
                 >
                   <ArrowLeft className={`h-4 w-4 ${isRtl ? "rotate-180" : ""}`} />
                   <span>{t.common.back}</span>
                 </Button>
               ) : (
-                <div />
+                <div className="hidden xs:block" />
               )}
 
               {step < 4 ? (
@@ -799,7 +812,7 @@ export default function OnboardingPage() {
                   type="button"
                   variant="default"
                   onClick={handleNext}
-                  className="gap-2 text-xs font-bold rounded-xl shadow-md"
+                  className="w-full xs:w-auto gap-2 text-xs font-bold rounded-xl shadow-md"
                 >
                   <span>{t.common.next}</span>
                   <ArrowRight className={`h-4 w-4 ${isRtl ? "rotate-180" : ""}`} />
@@ -810,16 +823,16 @@ export default function OnboardingPage() {
                   variant="gradient"
                   onClick={handleComplete}
                   disabled={loading}
-                  className="gap-2 text-xs font-extrabold px-6 rounded-xl shadow-lg shadow-emerald-500/25"
+                  className="w-full xs:w-auto gap-2 text-xs font-extrabold px-6 rounded-xl shadow-lg shadow-emerald-500/25"
                 >
                   {loading ? (
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center justify-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
                       <span>{t.common.saving}</span>
                     </span>
                   ) : (
                     <>
-                      <Sparkles className="h-4 w-4" />
+                      <Sparkles className="h-4 w-4 shrink-0" />
                       <span>{t.onboarding.completeOnboarding}</span>
                     </>
                   )}

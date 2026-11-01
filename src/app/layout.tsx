@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "FitLife AI - Smart Health & Fitness Companion",
@@ -14,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white font-sans">
+      <body className="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white font-sans overflow-x-hidden min-w-0">
         <Providers>
           {children}
         </Providers>

@@ -336,18 +336,18 @@ export default function GoalsPage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <DashboardNav />
 
-      <main className="flex-1 container mx-auto px-4 sm:px-8 py-8 max-w-7xl">
+      <main className="flex-1 container mx-auto px-3 sm:px-6 md:px-8 py-6 sm:py-8 pb-24 md:pb-12 max-w-7xl">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                <Target className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                <Target className="h-3.5 w-3.5 shrink-0" />
                 <span>Goal Engine & Progression</span>
               </span>
               <span className="text-xs text-muted-foreground">Safe & Realistic Pacing</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-1">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight mt-1 break-words">
               {t.goalsManagement.title}
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
@@ -356,8 +356,8 @@ export default function GoalsPage() {
           </div>
 
           {/* Quick Actions & Unit Switcher */}
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <div className="flex items-center gap-1.5 bg-muted/70 p-1.5 rounded-2xl border border-border/80">
+          <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+            <div className="flex items-center gap-1.5 bg-muted/70 p-1 sm:p-1.5 rounded-2xl border border-border/80">
               <button
                 type="button"
                 onClick={() => handleUnitToggle("metric")}
@@ -423,22 +423,22 @@ export default function GoalsPage() {
 
         {/* ACTIVE GOAL HERO CARD */}
         {activeGoal ? (
-          <Card className="rounded-3xl border-emerald-500/30 bg-gradient-to-br from-card via-card to-emerald-500/5 shadow-xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+          <Card className="rounded-2xl sm:rounded-3xl border-emerald-500/30 bg-gradient-to-br from-card via-card to-emerald-500/5 shadow-xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 relative overflow-hidden">
             <div className="absolute top-0 end-0 p-6 opacity-10 pointer-events-none">
               <ActiveIcon className="h-44 w-44" />
             </div>
 
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
-              <div className="space-y-4 max-w-xl">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8 relative z-10">
+              <div className="space-y-3 sm:space-y-4 max-w-xl">
                 <div className="flex items-center gap-3">
-                  <div className={`h-12 w-12 rounded-2xl ${activeIconConfig.bg} ${activeIconConfig.color} flex items-center justify-center shadow-md`}>
-                    <ActiveIcon className="h-6 w-6" />
+                  <div className={`h-10 w-10 sm:h-12 sm:w-12 rounded-2xl ${activeIconConfig.bg} ${activeIconConfig.color} flex items-center justify-center shadow-md shrink-0`}>
+                    <ActiveIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+                    <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                       {t.goalsManagement.activeGoalCard}
                     </span>
-                    <h2 className="text-xl sm:text-2xl font-black text-foreground">
+                    <h2 className="text-lg sm:text-2xl font-black text-foreground">
                       {t.goals[activeGoal.goalType] || activeGoal.goalType}
                     </h2>
                   </div>
@@ -451,39 +451,39 @@ export default function GoalsPage() {
                 )}
 
                 {/* Key Metrics Grid */}
-                <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
-                  <div className="rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-3">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-1 sm:pt-2">
+                  <div className="rounded-xl sm:rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-2 sm:p-3 min-w-0">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-muted-foreground uppercase block truncate">
                       {t.goalsManagement.currentWeight}
                     </span>
-                    <span className="text-lg sm:text-xl font-black text-foreground block mt-0.5">
+                    <span className="text-base sm:text-xl font-black text-foreground block mt-0.5 truncate">
                       {currentDisplayWeight}
                     </span>
                   </div>
 
-                  <div className="rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-3">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                  <div className="rounded-xl sm:rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-2 sm:p-3 min-w-0">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-muted-foreground uppercase block truncate">
                       {t.goalsManagement.targetWeight}
                     </span>
-                    <span className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400 block mt-0.5">
+                    <span className="text-base sm:text-xl font-black text-emerald-600 dark:text-emerald-400 block mt-0.5 truncate">
                       {targetDisplayWeight}
                     </span>
                   </div>
 
-                  <div className="rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-3">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase block">
+                  <div className="rounded-xl sm:rounded-2xl border border-border/80 bg-background/80 backdrop-blur-sm p-2 sm:p-3 min-w-0">
+                    <span className="text-[9px] sm:text-[10px] font-bold text-muted-foreground uppercase block truncate">
                       {t.goalsManagement.difference}
                     </span>
-                    <span className="text-lg sm:text-xl font-black text-foreground block mt-0.5">
+                    <span className="text-base sm:text-xl font-black text-foreground block mt-0.5 truncate">
                       {deltaDisplay}
                     </span>
                   </div>
                 </div>
 
                 {/* Target Timeline and Safe Pace Info */}
-                <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground pt-1">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-muted-foreground pt-1">
                   <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5 text-primary" />
+                    <Calendar className="h-3.5 w-3.5 text-primary shrink-0" />
                     <span>
                       {t.goalsManagement.startDate}:{" "}
                       {new Date(activeGoal.startDate).toLocaleDateString()}
@@ -492,7 +492,7 @@ export default function GoalsPage() {
 
                   {activeGoal.targetDate && (
                     <span className="flex items-center gap-1 font-semibold text-foreground">
-                      <Clock className="h-3.5 w-3.5 text-emerald-500" />
+                      <Clock className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                       <span>
                         {t.goalsManagement.targetDate}:{" "}
                         {new Date(activeGoal.targetDate).toLocaleDateString()}
@@ -509,40 +509,40 @@ export default function GoalsPage() {
               </div>
 
               {/* Circular Progress & Quick Actions */}
-              <div className="flex flex-col items-center sm:items-end gap-4 shrink-0">
-                <div className="flex items-center gap-4 bg-background/80 backdrop-blur-sm p-4 rounded-3xl border border-border/80 shadow-sm">
+              <div className="flex flex-col items-center sm:items-end gap-3 sm:gap-4 shrink-0">
+                <div className="flex items-center gap-3 sm:gap-4 bg-background/80 backdrop-blur-sm p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-border/80 shadow-sm w-full sm:w-auto">
                   <ProgressRing
                     value={activeGoalProgress?.percentage ?? 0}
-                    size={84}
-                    strokeWidth={8}
+                    size={72}
+                    strokeWidth={7}
                     circleClassName="text-emerald-500"
                   >
-                    <span className="text-sm font-black text-foreground">
+                    <span className="text-xs sm:text-sm font-black text-foreground">
                       {activeGoalProgress?.percentage ?? 0}%
                     </span>
                   </ProgressRing>
 
-                  <div className="text-start">
-                    <span className="text-xs font-extrabold text-foreground block">
+                  <div className="text-start min-w-0">
+                    <span className="text-xs font-extrabold text-foreground block truncate">
                       {t.goalsManagement.progressPercentage}
                     </span>
-                    <span className="text-[11px] text-muted-foreground block mt-0.5">
+                    <span className="text-[10px] sm:text-[11px] text-muted-foreground block mt-0.5 truncate">
                       {activeGoalProgress?.weightRemainingKg
                         ? `${activeGoalProgress.weightRemainingKg} kg remaining`
                         : "On track"}
                     </span>
-                    <Badge variant="success" className="mt-2 text-[10px]">
+                    <Badge variant="success" className="mt-1.5 text-[9px] sm:text-[10px]">
                       {t.goalsManagement.inProgress}
                     </Badge>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                   <Button
                     size="sm"
                     variant="outline"
                     onClick={() => openEditModal(activeGoal)}
-                    className="rounded-xl text-xs font-semibold gap-1"
+                    className="rounded-xl text-xs font-semibold gap-1 flex-1 sm:flex-initial"
                   >
                     <Edit2 className="h-3.5 w-3.5" />
                     <span>{t.common.edit}</span>
@@ -551,7 +551,7 @@ export default function GoalsPage() {
                     size="sm"
                     variant="outline"
                     onClick={() => handleUpdateStatus(activeGoal.id, "completed")}
-                    className="rounded-xl text-xs font-semibold gap-1 text-emerald-600 hover:text-emerald-700"
+                    className="rounded-xl text-xs font-semibold gap-1 text-emerald-600 hover:text-emerald-700 flex-1 sm:flex-initial"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     <span>{t.goalsManagement.completed}</span>
@@ -742,8 +742,8 @@ export default function GoalsPage() {
 
       {/* CREATE / EDIT GOAL MODAL */}
       {showGoalModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl border border-border/80 bg-card p-6 shadow-2xl relative text-start space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-3 sm:p-4 animate-in fade-in">
+          <div className="w-[calc(100vw-2rem)] sm:max-w-lg rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-2xl relative text-start space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <h3 className="text-base font-black text-foreground flex items-center gap-2">
                 <Target className="h-5 w-5 text-emerald-500" />
@@ -931,8 +931,8 @@ export default function GoalsPage() {
 
       {/* LOG WEIGHT MODAL */}
       {showWeightModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in">
-          <div className="w-full max-w-sm rounded-3xl border border-border/80 bg-card p-6 shadow-2xl relative text-start space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-3 sm:p-4 animate-in fade-in">
+          <div className="w-[calc(100vw-2rem)] sm:max-w-sm rounded-2xl sm:rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-2xl relative text-start space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <h3 className="text-sm font-black text-foreground flex items-center gap-2">
                 <Scale className="h-4 w-4 text-emerald-500" />
