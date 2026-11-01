@@ -12,7 +12,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "test:phase1": "tsx scripts/test-phase1.ts",
-    "test:phase2": "tsx scripts/test-phase2-calculators.ts && tsx scripts/test-phase2-api.ts"
+    "test:phase2": "tsx scripts/test-phase2-calculators.ts && tsx scripts/test-phase2-api.ts",
+    "test:phase3": "tsx scripts/test-phase3-calculators.ts && tsx scripts/test-phase3-api.ts && tsx scripts/test-phase3-http.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

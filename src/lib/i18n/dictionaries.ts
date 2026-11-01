@@ -25,6 +25,10 @@ export interface Dictionary {
     home: string;
     assessment: string;
     goals: string;
+    foods: string;
+    prices: string;
+    calculator: string;
+    pkr: string;
     nutrition: string;
     workouts: string;
     progress: string;
@@ -236,6 +240,91 @@ export interface Dictionary {
     goalUpdatedSuccess: string;
     goalDeletedSuccess: string;
   };
+  foodExplorer: {
+    title: string;
+    subtitle: string;
+    searchPlaceholder: string;
+    allCategories: string;
+    foodType: string;
+    raw: string;
+    cooked: string;
+    prepared: string;
+    beverage: string;
+    pantry: string;
+    highProtein: string;
+    calories: string;
+    protein: string;
+    carbs: string;
+    fat: string;
+    fibre: string;
+    serving: string;
+    servingSize: string;
+    priceInCity: string;
+    noPriceRecorded: string;
+    viewDetails: string;
+    calculateNutrition: string;
+    sortBy: string;
+    sortName: string;
+    sortProtein: string;
+    sortCalories: string;
+    sortPrice: string;
+    source: string;
+    pakistanStaple: string;
+    filterByCity: string;
+  };
+  foodPricing: {
+    title: string;
+    subtitle: string;
+    selectCity: string;
+    allCities: string;
+    marketRetailer: string;
+    pricePerUnit: string;
+    source: string;
+    lastUpdated: string;
+    verificationStatus: string;
+    verified: string;
+    unverified: string;
+    expired: string;
+    underReview: string;
+    compareProtein: string;
+    costPer20gProtein: string;
+    costPerServing: string;
+    noPricesFound: string;
+    priceDisclaimer: string;
+    rankBadge: string;
+  };
+  foodCalculator: {
+    title: string;
+    subtitle: string;
+    selectFood: string;
+    quantity: string;
+    unit: string;
+    city: string;
+    calculateBtn: string;
+    summaryTitle: string;
+    costOutput: string;
+    noPriceNote: string;
+    gramsTotal: string;
+  };
+  foodDetail: {
+    backToExplorer: string;
+    nutritionFacts: string;
+    per100g: string;
+    perServing: string;
+    customCalculator: string;
+    quantity: string;
+    unit: string;
+    calculate: string;
+    macroDistribution: string;
+    regionalPrices: string;
+    marketSource: string;
+    proteinEfficiency: string;
+    economicProteinTitle: string;
+    economicProteinDesc: string;
+    noPriceAvailable: string;
+    pakistaniStapleBadge: string;
+    sourceReference: string;
+  };
   goals: Record<string, string>;
   activityLevels: Record<string, string>;
   experiences: Record<string, string>;
@@ -267,6 +356,10 @@ export const dictionaries: Record<Language, Dictionary> = {
       home: "Home",
       assessment: "Body Assessment",
       goals: "Fitness Goals",
+      foods: "Food Database",
+      prices: "Market Prices",
+      calculator: "Nutrition Calculator",
+      pkr: "PKR",
       nutrition: "Nutrition",
       workouts: "Workouts",
       progress: "Progress",
@@ -479,6 +572,91 @@ export const dictionaries: Record<Language, Dictionary> = {
       goalUpdatedSuccess: "Goal updated successfully!",
       goalDeletedSuccess: "Goal removed.",
     },
+    foodExplorer: {
+      title: "Pakistani Food Database",
+      subtitle: "Explore authentic nutritional breakdowns and verified local market prices.",
+      searchPlaceholder: "Search foods in English or Urdu (e.g. Eggs, Chicken, دال چنا)...",
+      allCategories: "All Categories",
+      foodType: "Food Variant",
+      raw: "Raw",
+      cooked: "Cooked",
+      prepared: "Prepared / Bakery",
+      beverage: "Beverage / Dairy",
+      pantry: "Pantry",
+      highProtein: "High Protein (≥15g)",
+      calories: "Calories",
+      protein: "Protein",
+      carbs: "Carbs",
+      fat: "Fat",
+      fibre: "Fibre",
+      serving: "Serving",
+      servingSize: "Serving Size",
+      priceInCity: "Market Price in",
+      noPriceRecorded: "Price Unavailable",
+      viewDetails: "View Details",
+      calculateNutrition: "Calculate Nutrition",
+      sortBy: "Sort By",
+      sortName: "Food Name",
+      sortProtein: "Highest Protein",
+      sortCalories: "Lowest Calories",
+      sortPrice: "Lowest Price",
+      source: "Source",
+      pakistanStaple: "Pakistani Diet Staple",
+      filterByCity: "Filter by City Prices",
+    },
+    foodPricing: {
+      title: "Pakistan Regional Food Pricing System",
+      subtitle: "Official government rate lists, verified supplier data, and cost-efficiency indexes.",
+      selectCity: "Select City / Market",
+      allCities: "All Cities",
+      marketRetailer: "Market / Retailer",
+      pricePerUnit: "Price per Unit",
+      source: "Source",
+      lastUpdated: "Last Collected",
+      verificationStatus: "Verification Status",
+      verified: "Verified Official Price",
+      unverified: "Unverified Submission",
+      expired: "Historical / Expired",
+      underReview: "Under Review",
+      compareProtein: "Protein Cost Efficiency",
+      costPer20gProtein: "Cost per 20g Protein",
+      costPerServing: "Cost per Serving",
+      noPricesFound: "No prices recorded for this filter.",
+      priceDisclaimer: "Official Price Assurance: Displayed prices are referenced against official District Administration rate lists and verified local market surveys. Unverified community submissions are clearly marked.",
+      rankBadge: "Best Value Protein",
+    },
+    foodCalculator: {
+      title: "Interactive Food Nutrition & Cost Calculator",
+      subtitle: "Calculate exact calories, macros, and estimated market cost for any entered serving.",
+      selectFood: "Choose Food Item",
+      quantity: "Quantity",
+      unit: "Unit",
+      city: "Select City for Pricing",
+      calculateBtn: "Calculate Nutrition & Cost",
+      summaryTitle: "Calculated Nutritional Output",
+      costOutput: "Estimated Market Cost",
+      noPriceNote: "No verified price recorded in this city. Nutrition calculated accurately.",
+      gramsTotal: "Total Weight in Grams",
+    },
+    foodDetail: {
+      backToExplorer: "Back to Food Explorer",
+      nutritionFacts: "Nutrition Facts",
+      per100g: "Per 100 Grams",
+      perServing: "Per Standard Serving",
+      customCalculator: "Portion & Serving Calculator",
+      quantity: "Enter Quantity",
+      unit: "Select Unit",
+      calculate: "Compute Macros",
+      macroDistribution: "Macronutrient Distribution",
+      regionalPrices: "Verified Regional Market Prices",
+      marketSource: "Source & Collection Agency",
+      proteinEfficiency: "Protein Cost-Efficiency Index",
+      economicProteinTitle: "Affordable Pakistani Protein Source",
+      economicProteinDesc: "Calculated cost per 20g of high-bioavailability protein based on real market rates.",
+      noPriceAvailable: "No current price list available for this city.",
+      pakistaniStapleBadge: "Pakistani Diet Staple",
+      sourceReference: "Nutritional Reference Standard",
+    },
     goals: {
       weight_gain: "Healthy Weight Gain",
       weight_loss: "Weight Loss",
@@ -528,6 +706,10 @@ export const dictionaries: Record<Language, Dictionary> = {
       home: "ہوم",
       assessment: "جسمانی جائزہ",
       goals: "فٹنس اہداف",
+      foods: "کھانوں کا ڈیٹا بیس",
+      prices: "مارکیٹ ریٹس",
+      calculator: "غذائیت کیلکولیٹر",
+      pkr: "روپے (PKR)",
       nutrition: "غذائیت",
       workouts: "ورزشیں",
       progress: "پیش رفت",
@@ -739,6 +921,91 @@ export const dictionaries: Record<Language, Dictionary> = {
       goalCreatedSuccess: "ہدف کامیابی سے مقرر ہو گیا!",
       goalUpdatedSuccess: "ہدف کامیابی سے اپ ڈیٹ ہو گیا!",
       goalDeletedSuccess: "ہدف حذف کر دیا گیا۔",
+    },
+    foodExplorer: {
+      title: "پاکستانی کھانوں کا ڈیٹا بیس",
+      subtitle: "روایتی کھانوں کی غذائیت اور مستند لوکل مارکیٹ ریٹس دیکھیں۔",
+      searchPlaceholder: "انگریزی یا اردو میں تلاش کریں (مثلاً انڈے، چکن، دال چنا)...",
+      allCategories: "تمام اقسام",
+      foodType: "خوراک کی قسم",
+      raw: "کچا",
+      cooked: "پکا ہوا",
+      prepared: "بیکری / تیار شدہ",
+      beverage: "مائع / دودھ",
+      pantry: "پینٹری / خشک میوہ",
+      highProtein: "اعلیٰ پروٹین (15 گرام یا زیادہ)",
+      calories: "کیلوریز",
+      protein: "پروٹین",
+      carbs: "کاربوہائیڈریٹ",
+      fat: "چکنائی",
+      fibre: "فائبر",
+      serving: "سرونگ",
+      servingSize: "سرونگ سائز",
+      priceInCity: "مارکیٹ ریٹ برائے",
+      noPriceRecorded: "ریٹ دستیاب نہیں",
+      viewDetails: "تفصیلات دیکھیں",
+      calculateNutrition: "غذائیت کا حساب لگائیں",
+      sortBy: "ترتیب دیں",
+      sortName: "نام",
+      sortProtein: "زیادہ پروٹین",
+      sortCalories: "کم کیلوریز",
+      sortPrice: "کم قیمت",
+      source: "ماخذ",
+      pakistanStaple: "پاکستانی خوراک کا حصہ",
+      filterByCity: "شہر کے ریٹ کے مطابق فلٹر",
+    },
+    foodPricing: {
+      title: "پاکستان علاقائی فوڈ پرائسنگ سسٹم",
+      subtitle: "حکومتی ریٹ لسٹیں، تصدیق شدہ مارکیٹ ریٹس اور پروٹین کی کفایتی لاگت۔",
+      selectCity: "شہر یا مارکیٹ منتخب کریں",
+      allCities: "تمام شہر",
+      marketRetailer: "مارکیٹ / ریٹیلر",
+      pricePerUnit: "قیمت فی اکائی",
+      source: "ماخذ",
+      lastUpdated: "تاریخ اندراج",
+      verificationStatus: "تصدیق کی حیثیت",
+      verified: "تصدیق شدہ سرکاری ریٹ",
+      unverified: "غیر تصدیق شدہ اندراج",
+      expired: "پرانا ریٹ",
+      underReview: "زیر جائزہ",
+      compareProtein: "پروٹین کی کفایتی لاگت",
+      costPer20gProtein: "20 گرام پروٹین کی لاگت",
+      costPerServing: "فی سرونگ لاگت",
+      noPricesFound: "اس فلٹر کے لیے کوئی قیمت نہیں ملی۔",
+      priceDisclaimer: "سرکاری قیمتوں کی تصدیق: دکھائے گئے ریٹس ضلعی انتظامیہ کی جاری کردہ فہرستوں اور تصدیق شدہ سروے پر مبنی ہیں۔ غیر تصدیق شدہ اندراجات واضح طور پر الگ ہیں۔",
+      rankBadge: "سب سے سستی پروٹین",
+    },
+    foodCalculator: {
+      title: "انٹرایکٹو غذائیت اور لاگت کا کیلکولیٹر",
+      subtitle: "کسی بھی مقدار کے لیے درست کیلوریز، میکروز اور مقامی مارکیٹ کی لاگت کا حساب لگائیں۔",
+      selectFood: "خوراک منتخب کریں",
+      quantity: "مقدار",
+      unit: "اکائی",
+      city: "قیمت کے لیے شہر منتخب کریں",
+      calculateBtn: "حساب لگائیں",
+      summaryTitle: "حساب شدہ غذائی نتیجہ",
+      costOutput: "تخمینی مارکیٹ لاگت",
+      noPriceNote: "اس شہر میں کوئی تصدیق شدہ قیمت درج نہیں، غذائیت کا درست حساب درج ہے۔",
+      gramsTotal: "کل وزن (گرام)",
+    },
+    foodDetail: {
+      backToExplorer: "فوڈ ڈیٹا بیس پر واپس جائیں",
+      nutritionFacts: "غذائی حقائق",
+      per100g: "فی 100 گرام",
+      perServing: "معیاری سرونگ کے مطابق",
+      customCalculator: "مقدار اور سرونگ کیلکولیٹر",
+      quantity: "مقدار درج کریں",
+      unit: "اکائی منتخب کریں",
+      calculate: "غذائیت معلوم کریں",
+      macroDistribution: "میکرو نیوٹرینٹس کی تقسیم",
+      regionalPrices: "علاقائی تصدیق شدہ مارکیٹ ریٹس",
+      marketSource: "ذریعہ اور سرکاری ادارہ",
+      proteinEfficiency: "پروٹین لاگت کی افادیت",
+      economicProteinTitle: "سستی اور معیاری پروٹین",
+      economicProteinDesc: "مارکیٹ کی قیمت کے مطابق 20 گرام پروٹین حاصل کرنے کا تخمینی خرچ۔",
+      noPriceAvailable: "اس شہر کے لیے فی الحال کوئی ریٹ درج نہیں ہے۔",
+      pakistaniStapleBadge: "روایتی پاکستانی خوراک",
+      sourceReference: "غذائی معلومات کا مستند ذریعہ",
     },
     goals: {
       weight_gain: "صحت مند وزن میں اضافہ (Healthy Weight Gain)",

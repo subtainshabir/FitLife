@@ -14,9 +14,9 @@ async function runMigration() {
   const sql = postgres(dbUrl, { max: 1 });
 
   try {
-    const migrationPath = path.join(process.cwd(), "drizzle", "0001_dry_nemesis.sql");
+    const migrationPath = path.join(process.cwd(), "drizzle", "0002_chunky_nuke.sql");
     const sqlContent = fs.readFileSync(migrationPath, "utf-8");
-    console.log("Applying migration 0001_dry_nemesis.sql...");
+    console.log("Applying migration 0002_chunky_nuke.sql for Phase 3...");
 
     // Split statements by --> statement-breakpoint
     const statements = sqlContent
@@ -28,7 +28,7 @@ async function runMigration() {
       await sql.unsafe(statement);
     }
 
-    console.log("Migration applied successfully!");
+    console.log("Migration 0002_chunky_nuke.sql applied successfully!");
 
     // Verify created tables
     const tables = await sql`
@@ -47,4 +47,3 @@ async function runMigration() {
 }
 
 runMigration();
-

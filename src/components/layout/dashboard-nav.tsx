@@ -17,6 +17,8 @@ import {
   Menu,
   X,
   Lock,
+  Building,
+  Scale,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { LanguageToggle } from "@/components/shared/language-toggle";
@@ -52,11 +54,22 @@ export function DashboardNav() {
       functional: true,
     },
     {
-      name: t.common.nutrition,
-      href: "/dashboard#nutrition",
+      name: t.common.foods,
+      href: "/foods",
       icon: Utensils,
-      functional: false,
-      badge: "Soon",
+      functional: true,
+    },
+    {
+      name: t.common.prices,
+      href: "/prices",
+      icon: Building,
+      functional: true,
+    },
+    {
+      name: t.common.calculator,
+      href: "/calculator",
+      icon: Scale,
+      functional: true,
     },
     {
       name: t.common.workouts,
@@ -317,6 +330,30 @@ export function DashboardNav() {
         >
           <Target className="h-4 w-4" />
           <span className="text-[10px]">{t.common.goals}</span>
+        </Link>
+
+        <Link
+          href="/foods"
+          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+            pathname.startsWith("/foods")
+              ? "text-primary font-bold"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Utensils className="h-4 w-4" />
+          <span className="text-[10px]">{t.common.foods}</span>
+        </Link>
+
+        <Link
+          href="/prices"
+          className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all ${
+            pathname === "/prices"
+              ? "text-primary font-bold"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Building className="h-4 w-4" />
+          <span className="text-[10px]">{t.common.prices}</span>
         </Link>
 
         <Link

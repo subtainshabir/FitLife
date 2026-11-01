@@ -642,6 +642,153 @@ function DashboardContent() {
         </div>
       </div>
 
+      {/* PHASE 3: PAKISTANI FOOD DATABASE & LOCAL MARKET PRICING */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-black text-foreground">
+                Pakistani Food Nutrition & Local Market Pricing
+              </h2>
+              <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold uppercase">
+                Phase 3 Live
+              </Badge>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Authentic Pakistani nutritional data (FCT/USDA), multi-city government rate lists, and cost-efficiency indexes.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/foods">
+              <Button variant="outline" size="sm" className="h-8 text-xs font-bold rounded-xl gap-1.5">
+                <span>Explore 40+ Foods</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* 3 Interactive Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* 1. Food Explorer Card */}
+          <Link href="/foods" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20">
+                    <Utensils className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
+                    Database Live
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-emerald-500 transition-colors">
+                    Pakistani Food Explorer
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Search 40+ local items in English and Urdu. View exact calories, protein, carbs, and fat per 100g and common serving units.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                <span>Browse Foods</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+
+          {/* 2. Market Prices Card */}
+          <Link href="/prices" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 text-white flex items-center justify-center shadow-md shadow-teal-500/20">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-teal-600 dark:text-teal-400 border-teal-500/30">
+                    5+ Cities
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-teal-500 transition-colors">
+                    Regional Market Prices
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Compare verified prices across Kotli (AJK), Rawalpindi, Islamabad, Lahore, and Karachi from DC lists & markets.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-teal-600 dark:text-teal-400">
+                <span>Check City Rates</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+
+          {/* 3. Nutrition & Cost Calculator Card */}
+          <Link href="/calculator" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-500 text-white flex items-center justify-center shadow-md shadow-cyan-500/20">
+                    <Calculator className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 border-cyan-500/30">
+                    Deterministic
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-cyan-500 transition-colors">
+                    Portion & Meal Calculator
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Calculate exact macros and estimated meal cost for any serving (grams, cups, spoons, pieces) in PKR.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-cyan-600 dark:text-cyan-400">
+                <span>Calculate Serving</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+        </div>
+
+        {/* Protein Value Leaderboard Spotlight */}
+        <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 via-card to-card p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="h-12 w-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-500 shrink-0 shadow-sm">
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <h4 className="text-sm font-extrabold text-foreground">
+                  Pakistan Protein Cost-Efficiency Benchmark
+                </h4>
+                <Badge className="bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold">
+                  Top Value
+                </Badge>
+              </div>
+              <p className="text-xs text-muted-foreground max-w-xl leading-relaxed">
+                <strong>Daal Chana (Raw)</strong> is currently the most affordable protein source in Punjab (~PKR 25 per 20g protein), followed by <strong>Chicken Breast</strong> (~PKR 60 per 20g protein) and <strong>Farm Eggs</strong> (~PKR 95 per 20g protein).
+              </p>
+            </div>
+          </div>
+
+          <Link href="/prices?tab=compare" className="shrink-0 self-end sm:self-center">
+            <Button variant="default" size="sm" className="h-9 text-xs font-bold rounded-xl gap-1.5 shadow-md shadow-emerald-500/20">
+              <span>View Leaderboard</span>
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+
       {/* Picture-Rich Workout & Wellness Feature Cards */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
@@ -695,7 +842,7 @@ function DashboardContent() {
           </div>
 
           {/* Nutrition Card */}
-          <div id="nutrition" className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm hover:shadow-xl transition-all duration-300">
+          <Link href="/foods" id="nutrition" className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
             <div className="relative h-44 overflow-hidden bg-slate-900">
               <img
                 src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop"
@@ -705,8 +852,8 @@ function DashboardContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
               <div className="absolute top-3 end-3">
-                <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 3+
+                <Badge className="bg-emerald-500 text-white font-bold text-[10px]">
+                  Phase 3 Live
                 </Badge>
               </div>
               <div className="absolute bottom-3 start-4">
@@ -717,20 +864,18 @@ function DashboardContent() {
             </div>
 
             <div className="p-5 pt-2">
-              <h3 className="text-sm font-extrabold text-foreground">
-                Pakistani & Global Nutrition
+              <h3 className="text-sm font-extrabold text-foreground group-hover:text-emerald-500 transition-colors">
+                Pakistani Food Database
               </h3>
               <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                {t.dashboard.nutritionDesc}
+                Explore local foods, verified regional market rates, and portion macro calculations. Automated meal planning unlocks in Phase 4.
               </p>
-              <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground font-semibold">
-                <span className="flex items-center gap-1.5">
-                  <Lock className="h-3 w-3 text-amber-500" />
-                  <span>Meal plans activate in Phase 3</span>
-                </span>
+              <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">
+                <span>Browse Foods Database</span>
+                <ChevronRight className="h-3.5 w-3.5" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Progress Analytics Card */}
           <div id="progress" className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm hover:shadow-xl transition-all duration-300">
