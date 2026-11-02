@@ -52,6 +52,9 @@ const PAGES_TO_INSPECT = [
   { name: "Local Market Prices", path: "src/app/prices/page.tsx" },
   { name: "Portion Calculator", path: "src/app/calculator/page.tsx" },
   { name: "AI Nutrition Planner", path: "src/app/nutrition/page.tsx" },
+  { name: "Exercise Library", path: "src/app/exercises/page.tsx" },
+  { name: "Exercise Detail", path: "src/app/exercises/[id]/page.tsx" },
+  { name: "Muscle Map Component", path: "src/components/exercises/muscle-map.tsx" },
 ];
 
 let passCount = 0;
@@ -125,6 +128,8 @@ async function runResponsiveTests() {
     { name: "Market Prices", file: "src/app/prices/page.tsx" },
     { name: "Calculator", file: "src/app/calculator/page.tsx" },
     { name: "Nutrition Planner", file: "src/app/nutrition/page.tsx" },
+    { name: "Exercise Library", file: "src/app/exercises/page.tsx" },
+    { name: "Exercise Detail", file: "src/app/exercises/[id]/page.tsx" },
   ];
 
   for (const p of authenticatedPages) {

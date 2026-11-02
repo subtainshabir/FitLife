@@ -30,6 +30,7 @@ export interface Dictionary {
     calculator: string;
     pkr: string;
     nutrition: string;
+    exercises: string;
     workouts: string;
     progress: string;
     aiCoach: string;
@@ -361,6 +362,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       calculator: "Nutrition Calculator",
       pkr: "PKR",
       nutrition: "Nutrition",
+      exercises: "Exercises",
       workouts: "Workouts",
       progress: "Progress",
       aiCoach: "AI Coach",
@@ -711,6 +713,7 @@ export const dictionaries: Record<Language, Dictionary> = {
       calculator: "غذائیت کیلکولیٹر",
       pkr: "روپے (PKR)",
       nutrition: "غذائیت",
+      exercises: "ورزش لائبریری",
       workouts: "ورزشیں",
       progress: "پیش رفت",
       aiCoach: "اے آئی کوچ",

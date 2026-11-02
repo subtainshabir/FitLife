@@ -844,6 +844,122 @@ function DashboardContent() {
         </div>
       </div>
 
+      {/* PHASE 5: EXERCISE LIBRARY & VISUAL MOVEMENT GUIDES */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-black text-foreground">
+                Exercise Library & Visual Anatomy Guides
+              </h2>
+              <Badge className="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold uppercase">
+                Phase 5 Live
+              </Badge>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Explore 30+ verified movements across Chest, Back, Shoulders, Arms, Legs, Core, Cardio, and Mobility.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/exercises">
+              <Button variant="gradient" size="sm" className="h-8 text-xs font-bold rounded-xl gap-1.5 shadow-md shadow-emerald-500/20">
+                <Dumbbell className="h-3.5 w-3.5" />
+                <span>Explore 30+ Exercises</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* 3 Quick Cards: Strength & Bodyweight, Visual Muscle Explorer, Cardio & Mobility */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Card 1 */}
+          <Link href="/exercises?category=strength" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20">
+                    <Dumbbell className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
+                    Strength & Calisthenics
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-emerald-500 transition-colors">
+                    Compound & Isolation Movements
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Master Push-ups, Bench Press, Squats, Pull-ups, and Rows with verified starting positions, execution cues, and safety tips.
+                  </p>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                <span>View Strength Guides</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+
+          {/* Card 2 */}
+          <Link href="/exercises" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-teal-500 to-cyan-500 text-white flex items-center justify-center shadow-md shadow-teal-500/20">
+                    <Activity className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-teal-600 dark:text-teal-400 border-teal-500/30">
+                    12 Muscle Groups
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-teal-500 transition-colors">
+                    Interactive Muscle Explorer
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Interactive anterior & posterior anatomical maps. Tap Chest, Lats, Quads, or Glutes to instantly filter exercises.
+                  </p>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-teal-600 dark:text-teal-400">
+                <span>Open Muscle Map</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+
+          {/* Card 3 */}
+          <Link href="/exercises?category=mobility" className="group">
+            <Card className="rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card p-5 h-full transition-all hover:shadow-lg flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="h-10 w-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-500 text-white flex items-center justify-center shadow-md shadow-cyan-500/20">
+                    <Sparkles className="h-5 w-5" />
+                  </div>
+                  <Badge variant="outline" className="text-[10px] font-bold text-cyan-600 dark:text-cyan-400 border-cyan-500/30">
+                    Mobility & Cardio
+                  </Badge>
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold text-foreground group-hover:text-cyan-500 transition-colors">
+                    Mobility, Stretches & Cardio
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    Spinal Cat-Cow, Hip Flexor stretches, Hamstring lengthening, and MET-calibrated cardio movements.
+                  </p>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-cyan-600 dark:text-cyan-400">
+                <span>Explore Mobility</span>
+                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Card>
+          </Link>
+        </div>
+      </div>
+
       {/* Picture-Rich Workout & Wellness Feature Cards */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">

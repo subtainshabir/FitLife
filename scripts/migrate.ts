@@ -14,9 +14,9 @@ async function runMigration() {
   const sql = postgres(dbUrl, { max: 1 });
 
   try {
-    const migrationPath = path.join(process.cwd(), "drizzle", "0003_noisy_roulette.sql");
+    const migrationPath = path.join(process.cwd(), "drizzle", "0004_silent_multiple_man.sql");
     const sqlContent = fs.readFileSync(migrationPath, "utf-8");
-    console.log("Applying migration 0003_noisy_roulette.sql for Phase 4...");
+    console.log("Applying migration 0004_silent_multiple_man.sql for Phase 5...");
 
     // Split statements by --> statement-breakpoint
     const statements = sqlContent
@@ -28,7 +28,7 @@ async function runMigration() {
       await sql.unsafe(statement);
     }
 
-    console.log("Migration 0003_noisy_roulette.sql applied successfully!");
+    console.log("Migration 0004_silent_multiple_man.sql applied successfully!");
 
     // Verify created tables
     const tables = await sql`

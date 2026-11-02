@@ -78,11 +78,10 @@ export function DashboardNav() {
       functional: true,
     },
     {
-      name: t.common.workouts,
-      href: "/dashboard#workouts",
+      name: t.common.exercises,
+      href: "/exercises",
       icon: Dumbbell,
-      functional: false,
-      badge: "Soon",
+      functional: true,
     },
     {
       name: t.common.profile,
@@ -361,15 +360,15 @@ export function DashboardNav() {
         </Link>
 
         <Link
-          href="/prices"
+          href="/exercises"
           className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl transition-all min-w-0 ${
-            pathname === "/prices"
+            pathname.startsWith("/exercises")
               ? "text-primary font-bold"
               : "text-muted-foreground hover:text-foreground"
             }`}
         >
-          <Building className="h-4 w-4 shrink-0" />
-          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.prices}</span>
+          <Dumbbell className="h-4 w-4 shrink-0 text-emerald-500" />
+          <span className="text-[9px] font-semibold truncate max-w-[50px]">{t.common.exercises}</span>
         </Link>
 
         <Link
