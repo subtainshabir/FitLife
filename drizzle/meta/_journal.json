@@ -43,6 +43,13 @@
       "when": 1793638336479,
       "tag": "0005_huge_invaders",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793641051797,
+      "tag": "0006_tricky_stellaris",
+      "breakpoints": true
     }
   ]
 }

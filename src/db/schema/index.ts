@@ -9,3 +9,4 @@ export * from "./prices";
 export * from "./plans";
 export * from "./exercises";
 export * from "./workouts";
+export * from "./diary";

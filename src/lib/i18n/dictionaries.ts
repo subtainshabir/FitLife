@@ -32,6 +32,8 @@ export interface Dictionary {
     nutrition: string;
     exercises: string;
     workouts: string;
+    diary: string;
+    water: string;
     progress: string;
     aiCoach: string;
     settings: string;
@@ -364,6 +366,8 @@ export const dictionaries: Record<Language, Dictionary> = {
       nutrition: "Nutrition",
       exercises: "Exercises",
       workouts: "Workouts",
+      diary: "Food Diary",
+      water: "Water Tracker",
       progress: "Progress",
       aiCoach: "AI Coach",
       settings: "Settings",
@@ -715,6 +719,8 @@ export const dictionaries: Record<Language, Dictionary> = {
       nutrition: "غذائیت",
       exercises: "ورزش لائبریری",
       workouts: "ورزشیں",
+      diary: "خوراک کی ڈائری",
+      water: "پانی کا ٹریکر",
       progress: "پیش رفت",
       aiCoach: "اے آئی کوچ",
       settings: "ترتیبات",

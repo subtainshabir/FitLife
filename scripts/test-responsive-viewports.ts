@@ -60,6 +60,7 @@ const PAGES_TO_INSPECT = [
   { name: "Active Workout Session", path: "src/app/workouts/session/[id]/page.tsx" },
   { name: "Workout Analytics", path: "src/app/workouts/analytics/page.tsx" },
   { name: "Rest Timer Component", path: "src/components/workouts/rest-timer.tsx" },
+  { name: "Daily Food Diary", path: "src/app/diary/page.tsx" },
 ];
 
 let passCount = 0;

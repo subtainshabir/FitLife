@@ -19,6 +19,8 @@ import {
   Lock,
   Building,
   Scale,
+  BookOpen,
+  Droplet,
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 import { LanguageToggle } from "@/components/shared/language-toggle";
@@ -57,6 +59,12 @@ export function DashboardNav() {
       name: t.common.nutrition,
       href: "/nutrition",
       icon: Sparkles,
+      functional: true,
+    },
+    {
+      name: t.common.diary,
+      href: "/diary",
+      icon: BookOpen,
       functional: true,
     },
     {
