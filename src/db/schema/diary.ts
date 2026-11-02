@@ -266,3 +266,4 @@ export const savedMealsRelations = relations(savedMeals, ({ one }) => ({
     references: [users.id],
   }),
 }));
+

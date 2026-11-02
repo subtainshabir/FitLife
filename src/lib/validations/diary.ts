@@ -99,3 +99,4 @@ export const savedMealSchema = z.object({
 });
 
 export type SavedMealInput = z.infer<typeof savedMealSchema>;
+
