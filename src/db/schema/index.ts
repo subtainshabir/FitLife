@@ -8,3 +8,4 @@ export * from "./foods";
 export * from "./prices";
 export * from "./plans";
 export * from "./exercises";
+export * from "./workouts";

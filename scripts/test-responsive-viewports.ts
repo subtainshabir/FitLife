@@ -55,6 +55,11 @@ const PAGES_TO_INSPECT = [
   { name: "Exercise Library", path: "src/app/exercises/page.tsx" },
   { name: "Exercise Detail", path: "src/app/exercises/[id]/page.tsx" },
   { name: "Muscle Map Component", path: "src/components/exercises/muscle-map.tsx" },
+  { name: "Workout Hub", path: "src/app/workouts/page.tsx" },
+  { name: "Routine Builder Form", path: "src/components/workouts/routine-builder-form.tsx" },
+  { name: "Active Workout Session", path: "src/app/workouts/session/[id]/page.tsx" },
+  { name: "Workout Analytics", path: "src/app/workouts/analytics/page.tsx" },
+  { name: "Rest Timer Component", path: "src/components/workouts/rest-timer.tsx" },
 ];
 
 let passCount = 0;

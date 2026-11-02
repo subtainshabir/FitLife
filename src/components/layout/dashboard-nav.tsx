@@ -84,6 +84,12 @@ export function DashboardNav() {
       functional: true,
     },
     {
+      name: t.common.workouts,
+      href: "/workouts",
+      icon: Activity,
+      functional: true,
+    },
+    {
       name: t.common.profile,
       href: "/profile",
       icon: User,

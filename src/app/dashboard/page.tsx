@@ -974,8 +974,8 @@ function DashboardContent() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Workout Card */}
-          <div id="workouts" className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm hover:shadow-xl transition-all duration-300">
+          {/* Workout Card - Phase 6 Live */}
+          <Link href="/workouts" id="workouts" className="group relative overflow-hidden rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
             <div className="relative h-44 overflow-hidden bg-slate-900">
               <img
                 src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop"
@@ -985,32 +985,30 @@ function DashboardContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
               <div className="absolute top-3 end-3">
-                <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 3+
+                <Badge className="bg-emerald-500 text-white font-bold text-[10px]">
+                  Phase 6 Live
                 </Badge>
               </div>
               <div className="absolute bottom-3 start-4">
-                <div className="h-9 w-9 rounded-xl bg-blue-500 text-white flex items-center justify-center shadow-md">
+                <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 text-white flex items-center justify-center shadow-md">
                   <Dumbbell className="h-4 w-4" />
                 </div>
               </div>
             </div>
 
             <div className="p-5 pt-2">
-              <h3 className="text-sm font-extrabold text-foreground">
-                Intelligent Workout Planner
+              <h3 className="text-sm font-extrabold text-foreground group-hover:text-emerald-500 transition-colors">
+                Intelligent Workout Planner & Tracking
               </h3>
               <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                {t.dashboard.workoutsDesc}
+                Log real-time sets, track volume load, configure rest timers, and receive progressive overload guidance.
               </p>
-              <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground font-semibold">
-                <span className="flex items-center gap-1.5">
-                  <Lock className="h-3 w-3 text-amber-500" />
-                  <span>Unlocks in Phase 3</span>
-                </span>
+              <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">
+                <span>Open Workout Planner</span>
+                <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Nutrition Card */}
           <Link href="/foods" id="nutrition" className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
