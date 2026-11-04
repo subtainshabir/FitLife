@@ -76,3 +76,4 @@ export type NewCoachMessage = typeof coachMessages.$inferInsert;
 
 export type CoachRecommendation = typeof coachRecommendations.$inferSelect;
 export type NewCoachRecommendation = typeof coachRecommendations.$inferInsert;
+

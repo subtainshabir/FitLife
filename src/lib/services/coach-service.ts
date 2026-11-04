@@ -588,3 +588,4 @@ export async function applyCoachRecommendation(userId: string, recommendationId:
 
   return updated;
 }
+
