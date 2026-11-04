@@ -214,3 +214,4 @@ export function PhotoComparator({
     </div>
   );
 }
+

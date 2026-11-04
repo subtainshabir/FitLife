@@ -413,3 +413,4 @@ export function LogMeasurementModal({
     </div>
   );
 }
+

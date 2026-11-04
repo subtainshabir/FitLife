@@ -27,3 +27,4 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     return NextResponse.json({ error: error.message || "Failed to load photo." }, { status: 404 });
   }
 }
+

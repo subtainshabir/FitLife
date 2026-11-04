@@ -112,3 +112,4 @@ export type NewProgressMilestone = typeof progressMilestones.$inferInsert;
 
 export type ProgressReport = typeof progressReports.$inferSelect;
 export type NewProgressReport = typeof progressReports.$inferInsert;
+

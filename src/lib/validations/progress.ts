@@ -87,3 +87,4 @@ export const photoUploadSchema = z.object({
   isHidden: z.boolean().default(false),
   notes: z.string().max(500).optional(),
 });
+

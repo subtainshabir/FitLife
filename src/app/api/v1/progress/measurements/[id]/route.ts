@@ -42,3 +42,4 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json({ error: error.message || "Failed to delete body measurement." }, { status: 500 });
   }
 }
+
