@@ -98,6 +98,12 @@ export function DashboardNav() {
       functional: true,
     },
     {
+      name: t.common.progress || "Transformation",
+      href: "/progress",
+      icon: LineChart,
+      functional: true,
+    },
+    {
       name: t.common.profile,
       href: "/profile",
       icon: User,

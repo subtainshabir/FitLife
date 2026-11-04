@@ -61,6 +61,7 @@ const PAGES_TO_INSPECT = [
   { name: "Workout Analytics", path: "src/app/workouts/analytics/page.tsx" },
   { name: "Rest Timer Component", path: "src/components/workouts/rest-timer.tsx" },
   { name: "Daily Food Diary", path: "src/app/diary/page.tsx" },
+  { name: "Transformation Hub", path: "src/app/progress/page.tsx" },
 ];
 
 let passCount = 0;
@@ -136,6 +137,7 @@ async function runResponsiveTests() {
     { name: "Nutrition Planner", file: "src/app/nutrition/page.tsx" },
     { name: "Exercise Library", file: "src/app/exercises/page.tsx" },
     { name: "Exercise Detail", file: "src/app/exercises/[id]/page.tsx" },
+    { name: "Transformation Hub", file: "src/app/progress/page.tsx" },
   ];
 
   for (const p of authenticatedPages) {

@@ -10,3 +10,4 @@ export * from "./plans";
 export * from "./exercises";
 export * from "./workouts";
 export * from "./diary";
+export * from "./progress";

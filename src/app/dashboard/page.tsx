@@ -1048,7 +1048,7 @@ function DashboardContent() {
           </Link>
 
           {/* Daily Food Diary & Nutrition Tracking Card - Phase 7 Live */}
-          <Link href="/diary" id="progress" className="group relative overflow-hidden rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
+          <Link href="/diary" className="group relative overflow-hidden rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
             <div className="relative h-44 overflow-hidden bg-slate-900">
               <img
                 src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop"
@@ -1078,6 +1078,42 @@ function DashboardContent() {
               </p>
               <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">
                 <span>Open Food Diary</span>
+                <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </div>
+          </Link>
+
+          {/* Body Transformation & Progress Analytics - Phase 8 Live */}
+          <Link href="/progress" id="progress" className="group relative overflow-hidden rounded-3xl border border-border/80 hover:border-emerald-500/50 bg-card shadow-sm hover:shadow-xl transition-all duration-300 block">
+            <div className="relative h-44 overflow-hidden bg-slate-900">
+              <img
+                src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop"
+                alt="Body Transformation & Progress Analytics"
+                className="w-full h-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+              <div className="absolute top-3 end-3">
+                <Badge className="bg-emerald-500 text-white font-bold text-[10px]">
+                  Phase 8 Live
+                </Badge>
+              </div>
+              <div className="absolute bottom-3 start-4">
+                <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 text-white flex items-center justify-center shadow-md">
+                  <LineChart className="h-4 w-4" />
+                </div>
+              </div>
+            </div>
+
+            <div className="p-5 pt-2">
+              <h3 className="text-sm font-extrabold text-foreground group-hover:text-emerald-500 transition-colors">
+                Body Transformation & Analytics
+              </h3>
+              <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                Weight history charts, body circumference tracking, private transformation photo journal, and habit consistency analytics.
+              </p>
+              <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-emerald-600 dark:text-emerald-400 font-bold">
+                <span>Open Transformation Hub</span>
                 <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
               </div>
             </div>

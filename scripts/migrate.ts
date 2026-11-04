@@ -14,9 +14,9 @@ async function runMigration() {
   const sql = postgres(dbUrl, { max: 1 });
 
   try {
-    const migrationPath = path.join(process.cwd(), "drizzle", "0006_tricky_stellaris.sql");
+    const migrationPath = path.join(process.cwd(), "drizzle", "0007_steep_kitty_pryde.sql");
     const sqlContent = fs.readFileSync(migrationPath, "utf-8");
-    console.log("Applying migration 0006_tricky_stellaris.sql for Phase 7...");
+    console.log("Applying migration 0007_steep_kitty_pryde.sql for Phase 8...");
 
     // Split statements by --> statement-breakpoint
     const statements = sqlContent
