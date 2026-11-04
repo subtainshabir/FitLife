@@ -98,6 +98,12 @@ export function DashboardNav() {
       functional: true,
     },
     {
+      name: t.common.aiCoach || "AI Coach",
+      href: "/coach",
+      icon: Sparkles,
+      functional: true,
+    },
+    {
       name: t.common.progress || "Transformation",
       href: "/progress",
       icon: LineChart,
@@ -176,9 +182,8 @@ export function DashboardNav() {
           {/* Controls & Quick Actions */}
           <div className="flex items-center gap-1.5 sm:gap-3">
             {/* Visual AI Coach Callout - Visible on desktop */}
-            <button
-              type="button"
-              onClick={() => setShowAiModal(true)}
+            <Link
+              href="/coach"
               className="hidden lg:inline-flex relative items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500/15 via-teal-500/15 to-cyan-500/15 px-3 py-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 hover:border-emerald-500/60 shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <span className="relative flex h-2 w-2">
@@ -188,9 +193,9 @@ export function DashboardNav() {
               <Sparkles className="h-3.5 w-3.5 text-emerald-500" />
               <span>{t.common.aiCoach}</span>
               <span className="rounded-md bg-emerald-500/20 px-1.5 py-0.2 text-[9px] uppercase font-extrabold tracking-wider">
-                Phase 2
+                Phase 9
               </span>
-            </button>
+            </Link>
 
             <LanguageToggle />
             <ThemeToggle />
@@ -286,22 +291,19 @@ export function DashboardNav() {
                 );
               })}
 
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setShowAiModal(true);
-                }}
+              <Link
+                href="/coach"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-between px-3 py-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 rounded-lg bg-emerald-500/10 border border-emerald-500/20 mt-1"
               >
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-emerald-500" />
                   <span>{t.common.aiCoach}</span>
                 </div>
-                <Badge variant="comingSoon" className="text-[9px]">
-                  Phase 2
+                <Badge className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[9px]">
+                  Phase 9 Live
                 </Badge>
-              </button>
+              </Link>
             </div>
 
             <Button

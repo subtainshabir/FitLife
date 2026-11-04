@@ -62,6 +62,7 @@ const PAGES_TO_INSPECT = [
   { name: "Rest Timer Component", path: "src/components/workouts/rest-timer.tsx" },
   { name: "Daily Food Diary", path: "src/app/diary/page.tsx" },
   { name: "Transformation Hub", path: "src/app/progress/page.tsx" },
+  { name: "AI Personal Coach", path: "src/app/coach/page.tsx" },
 ];
 
 let passCount = 0;

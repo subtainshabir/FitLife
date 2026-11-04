@@ -11,3 +11,4 @@ export * from "./exercises";
 export * from "./workouts";
 export * from "./diary";
 export * from "./progress";
+export * from "./coach";

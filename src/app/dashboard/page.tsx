@@ -619,27 +619,25 @@ function DashboardContent() {
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-1">
                 <h3 className="text-base sm:text-lg font-black text-white">
-                  FitLife AI Fitness Coach
+                  FitLife AI Personal Coach
                 </h3>
-                <Badge variant="comingSoon" className="text-[10px]">
-                  Phase 3 Flagship
+                <Badge className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-extrabold uppercase">
+                  Phase 9 Live
                 </Badge>
               </div>
               <p className="text-xs text-slate-300 max-w-md leading-relaxed">
-                24/7 conversational coaching reasoning on your physical metrics, BMI, BMR, and fitness objectives.
+                24/7 conversational coaching reasoning across your goals, nutrition logs, workout volume, and body measurements.
               </p>
             </div>
           </div>
 
-          <Button
-            type="button"
-            variant="default"
-            onClick={() => setShowAiModal(true)}
-            className="w-full md:w-auto text-xs font-bold px-6 py-2.5 sm:py-3 rounded-xl bg-white text-slate-950 hover:bg-slate-100 shadow-lg shadow-black/30 shrink-0"
+          <Link
+            href="/coach"
+            className="w-full md:w-auto inline-flex items-center justify-center text-xs font-bold px-6 py-2.5 sm:py-3 rounded-xl bg-white text-slate-950 hover:bg-slate-100 shadow-lg shadow-black/30 shrink-0 transition-transform hover:scale-[1.02]"
           >
-            <span>Preview AI Coach</span>
+            <span>Talk to Coach Hamza</span>
             <ArrowRight className={`h-4 w-4 ms-2 ${isRtl ? "rotate-180" : ""}`} />
-          </Button>
+          </Link>
         </div>
       </div>
 
